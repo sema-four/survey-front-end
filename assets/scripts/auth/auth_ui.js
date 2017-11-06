@@ -1,10 +1,15 @@
 'use strict'
 
 const store = require('./../store')
+const authHelper = require('./auth_helper')
 
 const signUpSuccess = function (data) {
   // console.log(data)
-  $('#result').html('You have signed up successfully. Now login.')
+  $('#result').html('You have signed up successfully.')
+  authHelper.clearFormInputFields('sign-up')
+  authHelper.clearFormInputFields('sign-in')
+  authHelper.clearFormInputFields('change-password')
+  $('#signUpModal').modal('hide')
   // $('#sign-up').fadeOut()
 }
 

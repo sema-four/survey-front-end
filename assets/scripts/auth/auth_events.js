@@ -3,18 +3,19 @@ const getFormFields = require('../../../lib/get-form-fields')
 // const store = require('../store')
 const api = require('./auth_api')
 const ui = require('./auth_ui')
+const authHelper = require('./auth_helper')
 
 // Start authentication event handlers
 const onSignUp = function (event) {
   const data = getFormFields(this)
   event.preventDefault()
-  if (data.passwords.old !== data.passwords.new) {
+  if (data.credentials.password !== data.credentials.password_confirmation) {
   //  console.log('sign-up', data)
+    ui.notSamePw()
+  } else {
     api.signUp(data)
       .then(ui.signUpSuccess)
       .catch(ui.signUpFailure)
-  } else {
-    ui.notSamePw()
   }
 }
 
@@ -59,11 +60,43 @@ const onChangePassword = function (event) {
   }
 }
 
+// This function will trigger the sign up form when "Sign Up/Register" button is
+// clicked. The form is hidden by default.
+const onSignUpToggle = function (event) {
+  event.preventDefault()
+  authHelper.setSignUpToggleShowHide()
+}
+
+const onSignInToggle = function (event) {
+  event.preventDefault()
+  authHelper.setSignInToggleShowHide()
+}
+
+const onChangePwdButton = function (event) {
+  $('#result').text('')
+  event.preventDefault()
+  authHelper.setOnChangePwdShowHide()
+}
+
+const onSignInRegister = function (event) {
+  event.preventDefault()
+  $('#sign-in').trigger('reset')
+  $('#sign-up').trigger('reset')
+  $('#sign-up, #sign-in-toggle, #sign-in-toggle-text, #change-password').addClass('hidden')
+  $('#sign-in, #sign-up-toggle, #sign-up-toggle-text').removeClass('hidden')
+  $('#signUpModalLabel').text('Sign In / Register')
+  $('#content').text('Informational messages will be displayed here...')
+}
+
 const addHandlers = function () {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
-  $('#sign-out').on('click', onSignOut)
+  $('#sign-out').on('submit', onSignOut)
   $('#change-password').on('submit', onChangePassword)
+  $('#sign-up-toggle').on('click', onSignUpToggle)
+  $('#sign-in-toggle').on('click', onSignInToggle)
+  $('#change-pwd-btn').on('click', onChangePwdButton)
+  $('#sign-in-register').on('click', onSignInRegister)
 }
 
 module.exports = {
