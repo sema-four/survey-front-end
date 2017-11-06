@@ -12,14 +12,172 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body class="container-fluid">
-      <h1>Example</h1>
+      <nav class="navbar navbar-inverse">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar">&nbsp;</span>
+              <span class="icon-bar">&nbsp;</span>
+              <span class="icon-bar">&nbsp;</span>
+            </button>
+            <a class="navbar-brand" href="#">Favorite Surveys</a>
+          </div>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left">
+              <button id="sign-in-register" type="button" class="btn btn-success btn-sm" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#signUpModal">Sign-In / Register</button>
+              <button id="home" type="button" class="btn btn-success btn-sm hidden">Home</button>
+              <button id="add-kid" type="button" class="btn btn-info btn-sm hidden" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#kidModal">Add Child</button>
+              <button id="add-survey" type="button" class="btn btn-info btn-sm hidden" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#surveyModal">Add Survey</button>
+            </form>
+            <form id="sign-out" class="navbar-form navbar-right hidden">
+              <button id="change-pwd-btn" type="button" class="btn btn-info btn-sm hidden" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#signUpModal">Change Password</button>
+              <button type="submit" class="btn btn-danger btn-sm">Sign Out</button>
+            </form>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+          <div id="container" class="container-fluid">
+            <h5 id="result">Relevant messages will be displayed here!!</h5><br><br>
+            <h4 id="infoMessage">Please sign in to add/view children and their favorite surveys</h4>
+            <div class="container-fluid bg-3">
+              <div id="kids" class="row">
+                <!-- children and surveys here-->
+              </div>
+            </div>
+          </div>
+            <!-- Sign Up Modal -->
+            <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="signUpModalLabel">Sign In / Register</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <h5 id="sign-up-toggle-text">If not a registered user, then please register</h5>
+                    <button id="sign-up-toggle" type="button" class="btn btn-success btn-sm">Sign Up / Register</button>
+                    <h5 id="sign-in-toggle-text" class="hidden">If already a registered user, then please sign-in</h5>
+                    <button id="sign-in-toggle" type="button" class="btn btn-success hidden btn-sm">Sign in</button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="sign-up" class="hidden">
+                      <fieldset>
+                        <legend>Sign Up!</legend>
+                        <input type="text" name="credentials[email]" placeholder="Email here" required>
+                        <input type="password" name="credentials[password]" placeholder="Password here" required>
+                        <input type="password" name="credentials[password_confirmation]" placeholder="Password conformation here" required><br><br>
+                        <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Sign up">
+                      </fieldset>
+                    </form>
+                    <form id="change-password" class="hidden">
+                      <fieldset>
+                        <legend>Change Password!</legend>
+                        <input type="password" name="passwords[old]" placeholder="Old password here" required>
+                        <input type="password" name="passwords[new]" placeholder="New password here" required>
+                        <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Change Password">
+                      </fieldset>
+                    </form>
+                    <form id="sign-in">
+                      <fieldset>
+                        <legend>Sign In!</legend>
+                        <input type="text" name="credentials[email]" placeholder="Email here" required>
+                        <input type="password" name="credentials[password]" placeholder="Password here" required>
+                        <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Sign in">
+                      </fieldset>
+                    </form><br>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                    </div></br>
+                    <p id="content">Informational messages will be displayed here...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Survey modal-->
+            <div class="modal fade" id="surveyModal" tabindex="-1" role="dialog" aria-labelledby="surveyModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="surveyModalLabel">Manage Surveys</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div id='surveyModalBody' class="modal-body">
+                    <form id="manage-survey">
+                      <fieldset>
+                        <legend>Update Survey</legend>
+                        <input type="text" name="survey[title]" placeholder="Title here" required>
+                        <input type="text" name="survey[author]" placeholder="Author here">
+                        <input type="text" name="survey[content]" placeholder="Description here" required><br>
+                        <input type="text" name="survey[image_url]" placeholder="Image URL here"><br><br>
+                        <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Update">
+                      </fieldset>
+                    </form>
+                    <form id="create-survey">
+                      <fieldset>
+                        <legend>Add Survey</legend>
+                        <input type="text" name="survey[title]" placeholder="Title here" required>
+                        <input type="text" name="survey[author]" placeholder="Author here">
+                        <input type="text" name="survey[content]" placeholder="Description here" required><br>
+                        <input type="text" name="survey[image_url]" placeholder="Image URL here"><br><br>
+                        <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Add">
+                      </fieldset>
+                    </form>
+                    <br>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                    </div></br>
+                    <p id="survey-content">Informational messages will be displayed here...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Kid Modal -->
+            <div class="modal fade" id="kidModal" tabindex="-1" role="dialog" aria-labelledby="kidModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="kidModalLabel">Manage Children</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="manage-kid">
+                      <fieldset>
+                        <legend>Update Child</legend>
+                        <input type="text" name="kid[first_name]" placeholder="Name here" required>
+                        <input type="text" name="kid[last_name]" placeholder="Surname here" required>
+                        <input type="text" name="kid[image_url]" placeholder="Image URL here"><br><br>
+                        <input id="modal-update-kid" type="submit" class="btn btn-primary btn-sm" name="submit" value="Update">
+                      </fieldset>
+                    </form>
+                    <form id="create-kid">
+                      <fieldset>
+                        <legend>Add Child</legend>
+                        <input type="text" name="kid[first_name]" placeholder="Name here" required>
+                        <input type="text" name="kid[last_name]" placeholder="Surname here" required>
+                        <input type="text" name="kid[image_url]" placeholder="Image URL here"><br><br>
+                        <input id="modal-add-kid" type="submit" class="btn btn-primary btn-sm" name="submit" value="Add">
+                      </fieldset>
+                    </form>
+                    <br>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                    </div></br>
+                    <p id="kid-content">Informational messages will be displayed here...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
     </body>
 </html>
