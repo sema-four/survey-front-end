@@ -33,7 +33,7 @@ const signInSuccess = function (data) {
   $('#signUpModal').modal('hide')
   //  // $('#infoMessage').html('&nbsp;')
   $('#sign-in-register, #infoMessage').addClass('hidden')
-  $('#getKidsButton, #add-kid, #add-book').removeClass('hidden')
+  $('#create-survey, #view-dashboard, #view-surveys').removeClass('hidden')
   // .displayUsersChildren()
   authHelper.setSignInSuccessShowHide()
 
@@ -48,8 +48,14 @@ const signInFailure = function (error) {
 const signOutSuccess = function () {
   $('#lndingpg_create_survey_button').addClass('hide')
   $('#lndingpg_view_dashboard_button').addClass('hide')
+  $('#sign-in-register, #infoMessage').removeClass('hidden')
+  // need to determine if we want to remove the kids button or repurpose it
+  // for navigation to surveys, dashboard, or create survey
+  $('#getKidsButton, #add-kid, #add-book').addClass('hide')
+  authHelper.setSignOutSuccessShowHide()
   $(':input', '#sign-in').val('')
   $('#result').show().html('You have signed out successfully').fadeOut(8000)
+  $('#create-survey, #view-dashboard, #view-surveys').addClass('hidden')
   // need to clear memory of the user information which includes token and auth header
   store.user = null
 }

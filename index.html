@@ -22,7 +22,7 @@
               <span class="icon-bar">&nbsp;</span>
               <span class="icon-bar">&nbsp;</span>
             </button>
-            <a class="navbar-brand" href="#">Favorite Surveys</a>
+            <a class="navbar-brand" href="#">Survey Says!</a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -30,8 +30,9 @@
             <form class="navbar-form navbar-left">
               <button id="sign-in-register" type="button" class="btn btn-success btn-sm" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#signUpModal">Sign-In / Register</button>
               <button id="home" type="button" class="btn btn-success btn-sm hidden">Home</button>
-              <button id="add-kid" type="button" class="btn btn-info btn-sm hidden" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#kidModal">Add Child</button>
-              <button id="add-survey" type="button" class="btn btn-info btn-sm hidden" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#surveyModal">Add Survey</button>
+              <button id="create-survey" type="button" class="btn btn-info btn-sm hidden" data-keyboard="false" data-backdrop="static" >Create a Survey</button>
+              <button id="view-dashboard" type="button" class="btn btn-info btn-sm hidden" >Survey Dashboard</button>
+              <button id="view-surveys" type="button" class="btn btn-info btn-sm hidden">View Surveys</button>
             </form>
             <!-- Sign Out Form  -->
             <form id="sign-out" class="navbar-form navbar-right hidden">
@@ -172,6 +173,7 @@
                         <input id="modal-update-kid" type="submit" class="btn btn-primary btn-sm" name="submit" value="Update">
                       </fieldset>
                     </form>
+                    <!-- Need to correct this form -->
                     <form id="create-kid">
                       <fieldset>
                         <legend>Add Child</legend>
