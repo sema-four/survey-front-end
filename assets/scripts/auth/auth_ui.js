@@ -19,7 +19,7 @@ const signUpFailure = function (error) {
 }
 
 const signInSuccess = function (data) {
-  console.log(data)
+  console.log('signInSuccess called:', data)
   // $('.enter-data').show()
   // $('.welcome-box').hide()
   // $('.navigation-bar').show()
@@ -27,6 +27,16 @@ const signInSuccess = function (data) {
   $('#lndingpg_create_survey_button').removeClass('hide')
   $('#lndingpg_view_dashboard_button').removeClass('hide')
   // we have to store the user data or header somwhere.  sto we will put it in ../store.js
+
+  // app.user = data.user
+  //  $('#result').text('Signed in successfully!!')
+  $('#signUpModal').modal('hide')
+  //  // $('#infoMessage').html('&nbsp;')
+  $('#sign-in-register, #infoMessage').addClass('hidden')
+  $('#getKidsButton, #add-kid, #add-book').removeClass('hidden')
+  // .displayUsersChildren()
+  authHelper.setSignInSuccessShowHide()
+
   store.user = data.user
 }
 
@@ -36,15 +46,10 @@ const signInFailure = function (error) {
 }
 
 const signOutSuccess = function () {
-  // console.log(data)
-  // $('.enter-data').hide()
-  // $('.view-data').hide()
-  // $('.navigation-bar').hide()
-  // $('.welcome-box').show()
   $('#lndingpg_create_survey_button').addClass('hide')
   $('#lndingpg_view_dashboard_button').addClass('hide')
   $(':input', '#sign-in').val('')
-  $('#result').html('You have signed out successfully').fadeOut(8000)
+  $('#result').show().html('You have signed out successfully').fadeOut(8000)
   // need to clear memory of the user information which includes token and auth header
   store.user = null
 }
@@ -57,7 +62,7 @@ const signOutFailure = function (error) {
 const changePWSuccess = function () {
   $('#result').show().html('You have successfully changed your password').fadeOut(8000)
   $(':input', '#change-password').val('')
-  // $('#change-password').hide()
+  $('#signUpModal').modal('hide')
 }
 
 const changePWFailure = function (error) {

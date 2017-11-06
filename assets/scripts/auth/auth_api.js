@@ -13,11 +13,11 @@ const signUp = function (data) {
 }
 
 const signIn = function (data) {
-  // console.log('signIn called')
+  // console.log('signIn called', data)
   return $.ajax({
     url: config.apiOrigin + '/sign-in',
     method: 'POST',
-    data
+    data: data
   })
 }
 
