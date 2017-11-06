@@ -33,6 +33,7 @@
               <button id="add-kid" type="button" class="btn btn-info btn-sm hidden" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#kidModal">Add Child</button>
               <button id="add-survey" type="button" class="btn btn-info btn-sm hidden" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#surveyModal">Add Survey</button>
             </form>
+            <!-- Sign Out Form  -->
             <form id="sign-out" class="navbar-form navbar-right hidden">
               <button id="change-pwd-btn" type="button" class="btn btn-info btn-sm hidden" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#signUpModal">Change Password</button>
               <button type="submit" class="btn btn-danger btn-sm">Sign Out</button>
@@ -44,6 +45,14 @@
             <h5 id="result">Relevant messages will be displayed here!!</h5><br><br>
             <h4 id="infoMessage">Please sign in to create a survey of your own.</h4>
             <div class="container-fluid bg-3">
+              <div id="lndingpg_create_survey_button" class="row hide">
+                <!-- List of surveys here-->
+                <p> Hello.  this is where create survey will go</p>
+              </div>
+              <div id="lndingpg_view_dashboard_button" class="row hide">
+                <!-- List of surveys here-->
+                <p> Hello.  this is where our view dashboard will go</p>
+              </div>
               <div id="lndingpg_survey_list" class="row">
                 <!-- List of surveys here-->
                 <p> Hello.  this is where our list of surveys will go</p>
@@ -67,6 +76,7 @@
                     <button id="sign-in-toggle" type="button" class="btn btn-success hidden btn-sm">Sign in</button>
                   </div>
                   <div class="modal-body">
+                    <!-- Sign Up Form  -->
                     <form id="sign-up" class="hidden">
                       <fieldset>
                         <legend>Sign Up!</legend>
@@ -76,6 +86,7 @@
                         <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Sign up">
                       </fieldset>
                     </form>
+                    <!-- Change Password Form  -->
                     <form id="change-password" class="hidden">
                       <fieldset>
                         <legend>Change Password!</legend>
@@ -84,6 +95,7 @@
                         <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Change Password">
                       </fieldset>
                     </form>
+                    <!-- Sign In Form  -->
                     <form id="sign-in">
                       <fieldset>
                         <legend>Sign In!</legend>
@@ -95,7 +107,7 @@
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
                     </div></br>
-                    <p id="content">Informational messages will be displayed here...</p>
+                    <p id="modal-message">Informational messages will be displayed here...</p>
                   </div>
                 </div>
               </div>
