@@ -24,8 +24,10 @@ const signInSuccess = function (data) {
   // $('.welcome-box').hide()
   // $('.navigation-bar').show()
   $('#result').html('You have signed in successfully').fadeOut(8000)
-  $('#lndingpg_create_survey_button').removeClass('hide')
-  $('#lndingpg_view_dashboard_button').removeClass('hide')
+  $('#lndingpg_create_survey').addClass('hidden')
+  $('#lndingpg_view_dashboard').removeClass('hidden')
+  $('#lndingpg_survey_list').addClass('hidden')
+
   // we have to store the user data or header somwhere.  sto we will put it in ../store.js
 
   // app.user = data.user
@@ -46,8 +48,9 @@ const signInFailure = function (error) {
 }
 
 const signOutSuccess = function () {
-  $('#lndingpg_create_survey_button').addClass('hide')
-  $('#lndingpg_view_dashboard_button').addClass('hide')
+  $('#lndingpg_create_survey').addClass('hidden')
+  $('#lndingpg_view_dashboard').addClass('hidden')
+  $('#lndingpg_survey_list').removeClass('hidden')
   $('#sign-in-register, #infoMessage').removeClass('hidden')
   // need to determine if we want to remove the kids button or repurpose it
   // for navigation to surveys, dashboard, or create survey

@@ -46,11 +46,11 @@
             <h5 id="result">Relevant messages will be displayed here!!</h5><br><br>
             <h4 id="infoMessage">Please sign in to create a survey of your own.</h4>
             <div class="container-fluid bg-3">
-              <div id="lndingpg_create_survey_button" class="row hide">
+              <div id="lndingpg_create_survey" class="row hidden">
                 <!-- List of surveys here-->
                 <p> Hello.  this is where create survey will go</p>
               </div>
-              <div id="lndingpg_view_dashboard_button" class="row hide">
+              <div id="lndingpg_view_dashboard" class="row hidden">
                 <!-- List of surveys here-->
                 <p> Hello.  this is where our view dashboard will go</p>
               </div>
@@ -113,86 +113,6 @@
                 </div>
               </div>
             </div>
-            <!--Survey modal-->
-            <div class="modal fade" id="surveyModal" tabindex="-1" role="dialog" aria-labelledby="surveyModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="surveyModalLabel">Manage Surveys</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div id='surveyModalBody' class="modal-body">
-                    <form id="manage-survey">
-                      <fieldset>
-                        <legend>Update Survey</legend>
-                        <input type="text" name="survey[title]" placeholder="Title here" required>
-                        <input type="text" name="survey[author]" placeholder="Author here">
-                        <input type="text" name="survey[content]" placeholder="Description here" required><br>
-                        <input type="text" name="survey[image_url]" placeholder="Image URL here"><br><br>
-                        <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Update">
-                      </fieldset>
-                    </form>
-                    <form id="create-survey">
-                      <fieldset>
-                        <legend>Add Survey</legend>
-                        <input type="text" name="survey[title]" placeholder="Title here" required>
-                        <input type="text" name="survey[author]" placeholder="Author here">
-                        <input type="text" name="survey[content]" placeholder="Description here" required><br>
-                        <input type="text" name="survey[image_url]" placeholder="Image URL here"><br><br>
-                        <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Add">
-                      </fieldset>
-                    </form>
-                    <br>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                    </div></br>
-                    <p id="survey-content">Informational messages will be displayed here...</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--Kid Modal -->
-            <div class="modal fade" id="kidModal" tabindex="-1" role="dialog" aria-labelledby="kidModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="kidModalLabel">Manage Children</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <form id="manage-kid">
-                      <fieldset>
-                        <legend>Update Child</legend>
-                        <input type="text" name="kid[first_name]" placeholder="Name here" required>
-                        <input type="text" name="kid[last_name]" placeholder="Surname here" required>
-                        <input type="text" name="kid[image_url]" placeholder="Image URL here"><br><br>
-                        <input id="modal-update-kid" type="submit" class="btn btn-primary btn-sm" name="submit" value="Update">
-                      </fieldset>
-                    </form>
-                    <!-- Need to correct this form -->
-                    <form id="create-kid">
-                      <fieldset>
-                        <legend>Add Child</legend>
-                        <input type="text" name="kid[first_name]" placeholder="Name here" required>
-                        <input type="text" name="kid[last_name]" placeholder="Surname here" required>
-                        <input type="text" name="kid[image_url]" placeholder="Image URL here"><br><br>
-                        <input id="modal-add-kid" type="submit" class="btn btn-primary btn-sm" name="submit" value="Add">
-                      </fieldset>
-                    </form>
-                    <br>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                    </div></br>
-                    <p id="kid-content">Informational messages will be displayed here...</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
 
     </body>
 </html>
