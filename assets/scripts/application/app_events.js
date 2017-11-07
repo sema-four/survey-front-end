@@ -1,4 +1,6 @@
 'use strict'
+
+// const store = require('./../store')
 const getFormFields = require('../../../lib/get-form-fields')
 const appUi = require('./app_ui')
 const appApi = require('./app_api')
@@ -36,6 +38,12 @@ const onGetSurveys = function (data) {
     .catch(appUi.onGetSurveysFailure)
 }
 
+const onGetUserSurveys = function (id) {
+  appApi.getSurveys()
+    .then(appUi.onGetUserSurveysSuccess)
+    .catch(appUi.onGetUserSurveysFailure)
+}
+
 const onCreateSurvey = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -50,10 +58,12 @@ const addHandlers = function () {
   $('#view-dashboard').on('click', ontoggleDashboard)
   $('#view-surveys').on('click', ontoggleSurveyList)
   $('#create-survey-form').on('submit', onCreateSurvey)
+  $('#view-dashboard').on('click', onGetUserSurveys)
 }
 
 module.exports = {
   addHandlers,
   onGetSurveys,
-  onCreateSurvey
+  onCreateSurvey,
+  onGetUserSurveys
 }

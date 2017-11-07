@@ -1,6 +1,8 @@
 'use strict'
-// const store = require('./../store')
+
+const store = require('./../store')
 const showSurveysTemplate = require('../templates/surveys.handlebars')
+// const showUserSurveysTemplate = require('../templates/user-surveys.handlebars')
 
 const toggleCreateSurvey = function () {
   $('#lndingpg_view_dashboard').addClass('hidden')
@@ -37,6 +39,19 @@ const onCreateSurveyFailure = function () {
   $('#result').show().html('Survey could <span style="color:#f4c542 ">not</span> be created. Some fields may be missing').fadeOut(8000)
 }
 
+const onGetUserSurveysSuccess = function (data) {
+  const id = store.user.id
+  console.log('User is is', id)
+  console.log('Surveys:', data.surveys)
+  let titles = ''
+  for (let i = 0; i < data.surveys.length; i++) {
+    if (id === data.surveys[i]._owner) {
+      titles = titles + ' ' + data.surveys[i].title + '<br>'
+    }
+  }
+  $('#lndingpg_view_dashboard').html(titles)
+}
+
 module.exports = {
   toggleSurveyList,
   toggleDashboard,
@@ -44,5 +59,6 @@ module.exports = {
   onGetSurveysSuccess,
   onCreateSurveySuccess,
   onCreateSurveyFailure,
-  onGetSurveyFailure
+  onGetSurveyFailure,
+  onGetUserSurveysSuccess
 }

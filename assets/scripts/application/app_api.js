@@ -8,7 +8,6 @@ console.log('The URL is ', config.apiOrigin)
 const getSurveys = function (data) {
   return $.ajax({
     url: config.apiOrigin + '/surveys',
-    // url: 'http://localhost:4741/surveys',
     method: 'GET',
     data
   })

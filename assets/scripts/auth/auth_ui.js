@@ -2,6 +2,7 @@
 
 const store = require('./../store')
 const authHelper = require('./auth_helper')
+const appEvents = require('./../application/app_events')
 
 const signUpSuccess = function (data) {
   // console.log(data)
@@ -38,8 +39,8 @@ const signInSuccess = function (data) {
   $('#create-survey, #view-dashboard, #view-surveys').removeClass('hidden')
   // .displayUsersChildren()
   authHelper.setSignInSuccessShowHide()
-
   store.user = data.user
+  appEvents.onGetUserSurveys()
 }
 
 const signInFailure = function (error) {
