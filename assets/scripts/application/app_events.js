@@ -11,6 +11,7 @@ const ontoggleDashboard = function (event) {
 }
 const ontoggleSurveyList = function (event) {
   appUi.toggleSurveyList()
+  onGetSurveys()
 }
 
 // const displayQuestions = function () {
@@ -30,27 +31,29 @@ $('select').change(function () {
 
 const onGetSurveys = function (data) {
   // event.preventDefault()
-  appApi.index()
+  appApi.getSurveys()
     .then(appUi.onGetSurveysSuccess)
-    .catch(appUi.onError)
+    .catch(appUi.onGetSurveysFailure)
 }
 
-const onCreateSurveys = function (event) {
+const onCreateSurvey = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  appApi.create(data)
-    .then(appUi.onGetSurveysSuccess)
-    .catch(appUi.onError)
+  console.log('data is', data)
+  appApi.createSurvey(data)
+    .then(appUi.onCreateSurveySuccess)
+    .catch(appUi.onCreateSurveyFailure)
 }
 
 const addHandlers = function () {
   $('#create-survey').on('click', ontoggleCreateSurvey)
   $('#view-dashboard').on('click', ontoggleDashboard)
   $('#view-surveys').on('click', ontoggleSurveyList)
+  $('#create-survey-form').on('submit', onCreateSurvey)
 }
 
 module.exports = {
   addHandlers,
   onGetSurveys,
-  onCreateSurveys
+  onCreateSurvey
 }

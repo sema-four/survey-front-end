@@ -47,8 +47,14 @@
             <h4 id="infoMessage">Please sign in to create a survey of your own.</h4>
             <div class="container-fluid bg-3">
               <div id="lndingpg_create_survey" class="row hidden">
-                <form>
+                <form id='create-survey-form'>
                   <fieldset>
+                    <input type="hidden" name="survey[questions.question1.active]" value="true">
+                    <input type="hidden" name="survey[questions.question2.active]" value="true">
+                    <input type="hidden" name="survey[questions.question3.active]" value="true">
+                    <input type="hidden" name="survey[questions.question1.options]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">
+                    <input type="hidden" name="survey[questions.question2.options]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">]
+                    <input type="hidden" name="survey[questions.question3.options]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">]
                     <legend>Create Survey!</legend>
                     <label for="question-number">How many questions?</label>
                       <select id="question-number">
@@ -57,10 +63,10 @@
                         <option value="3">3</option>
                       </select>
                         <label for="title">Enter Survey Title Here!</label>
-                        <input type="text" id="title" name="title[survey.title]" placeholder="Add Survey Title Here!" required>
+                        <input type="text" id="title" name="survey[title]" placeholder="Add Survey Title Here!" required>
                         <br>
                         <div id="question1">
-                    <input type="text" name="questions[survey.questions.question1.questionDesription]" size="50" placeholder="Add question here" required>
+                    <input type="text" name="survey[questions.question1.questionDescription]" size="50" placeholder="Add question here" required>
                      <input type="radio" value="strongly-disagree" checked> Strongly Disgree<br>
                      <input type="radio" value="disagree" checked> Disagree<br>
                      <input type="radio" value="neutral" checked> Neutral<br>
@@ -69,7 +75,7 @@
                     <br>
                   </div>
                   <div id="question2" class="hidden">
-                    <input type="text" name="questions[survey.questions.question2.questionDesription]" size="50"placeholder="Add question here" required>
+                    <input type="text" name="survey[questions.question2.questionDescription]" size="50"placeholder="Add question here" required>
                     <br>
                     <input type="radio" value="strongly-disagree" checked> Strongly Disagree<br>
                     <input type="radio" value="disagree" checked> Disagree<br>
@@ -79,7 +85,7 @@
                     <br>
                   </div>
                   <div id="question3" class="hidden">
-                    <input type="text" name="questions[survey.questions.question3.questionDesription]" size="50"placeholder="Add question here" required>
+                    <input type="text" name="survey[questions.question3.questionDescription]" size="50"placeholder="Add question here" required>
                     <br>
                     <input type="radio" value="strongly-disagree" checked> Strongly Disagree<br>
                     <input type="radio" value="disagree" checked> Disagree<br>
