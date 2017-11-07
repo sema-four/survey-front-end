@@ -1,6 +1,4 @@
-
 ## Sema-four Front End Project: Survey Site
-
 
 ## Project URLs:
 Sema-four Main Page: https://github.com/sema-four
