@@ -1,0 +1,9 @@
+{{#each surveys as |survey|}}
+
+  <div id="survey-id" data-id="{{survey.id}}">
+    <h5 class="name-result">{{survey.title}}</h5>
+    <button class='take'>Take This Survey</button>
+  </div>
+  <br><br>
+
+{{/each}}

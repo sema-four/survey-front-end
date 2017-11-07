@@ -1,15 +1,23 @@
 'use strict'
 // const getFormFields = require('../../../lib/get-form-fields')
-const app_ui = require('./app_ui')
+const appUi = require('./app_ui')
+const appApi = require('./app_api')
 
 const ontoggleCreateSurvey = function (event) {
-  app_ui.toggleCreateSurvey()
+  appUi.toggleCreateSurvey()
 }
 const ontoggleDashboard = function (event) {
-  app_ui.toggleDashboard()
+  appUi.toggleDashboard()
 }
 const ontoggleSurveyList = function (event) {
-  app_ui.toggleSurveyList()
+  appUi.toggleSurveyList()
+}
+
+const onGetSurveys = function (data) {
+  // event.preventDefault()
+  appApi.index()
+    .then(appUi.onGetSurveysSuccess)
+    .catch(appUi.onError)
 }
 
 const addHandlers = function () {
@@ -19,5 +27,6 @@ const addHandlers = function () {
 }
 
 module.exports = {
-  addHandlers
+  addHandlers,
+  onGetSurveys
 }
