@@ -47,8 +47,50 @@
             <h4 id="infoMessage">Please sign in to create a survey of your own.</h4>
             <div class="container-fluid bg-3">
               <div id="lndingpg_create_survey" class="row hidden">
-                <!-- List of surveys here-->
-                <p> Hello.  this is where create survey will go</p>
+                <form>
+                  <fieldset>
+                    <legend>Create Survey!</legend>
+                    <label for="question-number">How many questions?</label>
+                      <select id="question-number">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                      </select>
+                        <label for="title">Enter Survey Title Here!</label>
+                        <input type="text" id="title" name="title[survey.title]" placeholder="Add Survey Title Here!" required>
+                        <br>
+                        <div id="question1">
+                    <input type="text" name="questions[survey.questions.question1.questionDesription]" size="50" placeholder="Add question here" required>
+                     <input type="radio" value="strongly-disagree" checked> Strongly Disgree<br>
+                     <input type="radio" value="disagree" checked> Disagree<br>
+                     <input type="radio" value="neutral" checked> Neutral<br>
+                     <input type="radio" value="agree" checked> Agree<br>
+                     <input type="radio" value="strongly-agree" checked> Strongly Agree<br>
+                    <br>
+                  </div>
+                  <div id="question2" class="hidden">
+                    <input type="text" name="questions[survey.questions.question2.questionDesription]" size="50"placeholder="Add question here" required>
+                    <br>
+                    <input type="radio" value="strongly-disagree" checked> Strongly Disagree<br>
+                    <input type="radio" value="disagree" checked> Disagree<br>
+                    <input type="radio" value="neutral" checked> Neutral<br>
+                    <input type="radio" value="agree" checked> Agree<br>
+                    <input type="radio" value="strongly-agree" checked> Strongly Agree<br>
+                    <br>
+                  </div>
+                  <div id="question3" class="hidden">
+                    <input type="text" name="questions[survey.questions.question3.questionDesription]" size="50"placeholder="Add question here" required>
+                    <br>
+                    <input type="radio" value="strongly-disagree" checked> Strongly Disagree<br>
+                    <input type="radio" value="disagree" checked> Disagree<br>
+                    <input type="radio" value="neutral" checked> Neutral<br>
+                    <input type="radio" value="agree" checked> Agree<br>
+                    <input type="radio" value="strongly-agree" checked> Strongly Agree<br>
+                    <br>
+                  </div>
+                    <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Submit Survey">
+                  </fieldset>
+              </form>
               </div>
               <div id="lndingpg_view_dashboard" class="row hidden">
                 <!-- List of surveys here-->
