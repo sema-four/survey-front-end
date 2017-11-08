@@ -45,7 +45,7 @@ const onGetUserSurveys = function (id) {
 const onCreateSurvey = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  console.log('data is', data)
+  console.log('Event data is', data)
   appApi.createSurvey(data)
     .then(appUi.onCreateSurveySuccess)
     .catch(appUi.onCreateSurveyFailure)

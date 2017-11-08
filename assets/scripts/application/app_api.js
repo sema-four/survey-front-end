@@ -23,83 +23,38 @@ const deleteSurvey = function (id) {
   })
 }
 
+const getQuestionJson = function (stuff) {
+  const descriptionArray = stuff.survey['questions.question.questionDescription']
+  const optionsArray = stuff.survey['questions.question.options']
+  const activeArray = stuff.survey['questions.question.active']
+  const questionsJson = {
+    'survey': {
+      'title': stuff.survey.title,
+      'questions': []
+    }
+  }
+  for (let i = 0; i < descriptionArray.length; i++) {
+    questionsJson.survey.questions.push({
+      'question': {
+        'questionDescription': descriptionArray[i],
+        'options': optionsArray[i],
+        'active': activeArray[i]
+      }
+    })
+  }
+  console.log('Questions JSON is:', questionsJson)
+  return questionsJson
+}
+
 const createSurvey = function (stuff) {
-  console.log('data is', stuff)
-  console.log('questions is', stuff.survey['questions.question1.active'])
+  const quesJson = getQuestionJson(stuff)
   return $.ajax({
     url: config.apiOrigin + '/surveys',
     method: 'POST',
     headers: {
       Authorization: 'Token token=' + store.user.token
     },
-    data: {
-      'survey': {
-        'title': stuff.survey.title,
-        'questions': [{
-          'question': {
-            'questionDescription': stuff.survey['questions.question1.questionDescription'],
-            'active': stuff.survey['questions.question1.active'],
-            'options': stuff.survey['questions.question1.options'],
-            'responses': [{
-              'response': {
-                'answer': 'Agree',
-                'responseId': '123',
-                'anonymous': false
-              }
-            },
-            {
-              'response': {
-                'answer': 'DisAgree',
-                'responseId': '123',
-                'anonymous': false
-              }
-            },
-            {
-              'response': {
-                'answer': 'DisAgree',
-                'responseId': '123',
-                'anonymous': false
-              }
-            }]
-          }
-        },
-        {
-          'question': {
-            'questionDescription': stuff.survey['questions.question2.questionDescription'],
-            'active': stuff.survey['questions.question2.active'],
-            'options': stuff.survey['questions.question2.options'],
-            'responses': [{
-              'response': {
-                'answer': 'Neutral',
-                'responseId': '123',
-                'anonymous': true
-              }
-            },
-            {
-              'response': {
-                'answer': 'DisAgree',
-                'responseId': '123',
-                'anonymous': true
-              }
-            }]
-          }
-        },
-        {
-          'question': {
-            'questionDescription': stuff.survey['questions.question3.questionDescription'],
-            'active': stuff.survey['questions.question3.active'],
-            'options': stuff.survey['questions.question3.options'],
-            'responses': [{
-              'response': {
-                'answer': 'Strongly Agree',
-                'responseId': '123',
-                'anonymous': true
-              }
-            }]
-          }
-        }]
-      }
-    }
+    data: quesJson
   })
 }
 
