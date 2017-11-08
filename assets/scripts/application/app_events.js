@@ -53,12 +53,27 @@ const onCreateSurvey = function (event) {
     .catch(appUi.onCreateSurveyFailure)
 }
 
+const onDeleteSurvey = function (event) {
+  event.preventDefault()
+  const id = $(event.target).data('id')
+  console.log('Guys the ID is', id)
+  console.log(event)
+  console.log(event.target)
+  appApi.deleteSurvey(id)
+    .then(appUi.onDeleteSurveySuccess)
+    .then(onGetUserSurveys)
+    .catch(appUi.onDeleteSurveyFailure)
+}
+
 const addHandlers = function () {
   $('#create-survey').on('click', ontoggleCreateSurvey)
   $('#view-dashboard').on('click', ontoggleDashboard)
   $('#view-surveys').on('click', ontoggleSurveyList)
   $('#create-survey-form').on('submit', onCreateSurvey)
   $('#view-dashboard').on('click', onGetUserSurveys)
+  $(document).on('click', '#delete-survey', function (e) {
+    onDeleteSurvey(e)
+  })
 }
 
 module.exports = {

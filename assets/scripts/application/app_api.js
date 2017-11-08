@@ -13,6 +13,16 @@ const getSurveys = function (data) {
   })
 }
 
+const deleteSurvey = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + '/surveys/' + id,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 const createSurvey = function (stuff) {
   console.log('data is', stuff)
   console.log('questions is', stuff.survey['questions.question1.active'])
@@ -49,5 +59,6 @@ const createSurvey = function (stuff) {
 
 module.exports = {
   getSurveys,
-  createSurvey
+  createSurvey,
+  deleteSurvey
 }
