@@ -1,15 +1,33 @@
 
-
-
-div {
-  border-style: solid;
-  border-width: 2px;
-  border-color: blue;
+#result,
+#page-header,
+#modal-message {
+  margin: auto;
+  text-align: center;
 }
 
-
-#lndingpg_survey_list, #lndingpg_create_survey_button, #lndingpg_view_dashboard_button {
+#lndingpg_survey_list,
+#lndingpg_create_survey,
+#lndingpg_view_dashboard {
   margin: auto;
   max-width: 1020px;
+}
+
+#lndingpg_survey_list,
+#lndingpg_view_dashboard {
   text-align: center;
+}
+
+footer {
+  text-align: center;
+}
+
+.team-logo {
+  height: 40px;
+  width: 222px;
+}
+
+.main-logo {
+  height: 70px;
+  width: 154px;
 }

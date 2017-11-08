@@ -7,6 +7,7 @@ const toggleCreateSurvey = function () {
   $('#lndingpg_view_dashboard').addClass('hidden')
   $('#lndingpg_survey_list').addClass('hidden')
   $('#lndingpg_create_survey').removeClass('hidden')
+  $('#page-header').show().html('Create a survey of your own.')
 }
 
 const toggleDashboard = function () {
@@ -19,13 +20,14 @@ const toggleSurveyList = function () {
   $('#lndingpg_view_dashboard').addClass('hidden')
   $('#lndingpg_survey_list').removeClass('hidden')
   $('#lndingpg_create_survey').addClass('hidden')
+  $('#page-header').show().html('Choose a survey to take.')
 }
 
 const onGetSurveysSuccess = function (data) {
   store.surveys = data.surveys
   const showSurveysHtml = showSurveysTemplate({ surveys: data.surveys })
   $('#lndingpg_survey_list').html(showSurveysHtml)
-  $('#result').show().html('Choose your survey.')
+  $('#page-header').show().html('Choose a survey to take.')
 }
 
 const onGetSurveyFailure = function () {
@@ -34,6 +36,7 @@ const onGetSurveyFailure = function () {
 
 const onCreateSurveySuccess = function (data) {
   $('#result').show().html('Survey Created Successfully!').fadeOut(8000)
+  $(':input', '#create-survey-form').val('')
 }
 
 const onCreateSurveyFailure = function () {
@@ -47,13 +50,11 @@ const onGetUserSurveysSuccess = function (data) {
   let titles = ''
   for (let i = 0; i < data.surveys.length; i++) {
     if (id === data.surveys[i]._owner) {
-      titles = titles + ' ' + data.surveys[i].title + '<br>' + "<button id='delete-survey' data-id=" + data.surveys[i].id + ' ' + "class='btn-danger'>Delete</button>" + '<br><br>'
+      titles = titles + ' ' + data.surveys[i].title + '<br>' + "<button id='delete-survey' data-id=" + data.surveys[i].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>'
     }
   }
-  if (titles === '') {
-
-  }
   $('#lndingpg_view_dashboard').html(titles)
+  $('#page-header').show().html('Here are all of your sruveys and their responses.')
 }
 
 const onGetUserSurveyFailure = function () {

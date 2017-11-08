@@ -4,6 +4,7 @@ const getFormFields = require('../../../lib/get-form-fields')
 const api = require('./auth_api')
 const ui = require('./auth_ui')
 const authHelper = require('./auth_helper')
+const appEvents = require('./../application/app_events')
 
 // Start authentication event handlers
 const onSignUp = function (event) {
@@ -39,6 +40,7 @@ const onSignOut = function (event) {
   //  console.log(data)
   api.signOut(data)
     .then(ui.signOutSuccess)
+    .then(appEvents.onGetSurveys)
     .catch(ui.signOutFailure)
 }
 

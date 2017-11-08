@@ -16,23 +16,21 @@ const ontoggleSurveyList = function (event) {
   onGetSurveys()
 }
 
-// const displayQuestions = function () {
+// This is for showing or hiding # of questions {
 $('select').change(function () {
   $('select option:selected').each(function () {
     if ($(this).val() === '1') {
-      $('#question1').removeClass('hidden')
       $('#question2, #question3').addClass('hidden')
     } else if ($(this).val() === '2') {
-      $('#question1, #question2').removeClass('hidden')
+      $('#question2').removeClass('hidden')
       $('#question3').addClass('hidden')
     } else if ($(this).val() === '3') {
-      $('#question1, #question2, #question3').removeClass('hidden')
+      $('#question2, #question3').removeClass('hidden')
     }
   })
 })
 
 const onGetSurveys = function (data) {
-  // event.preventDefault()
   appApi.getSurveys()
     .then(appUi.onGetSurveysSuccess)
     .catch(appUi.onGetSurveysFailure)
