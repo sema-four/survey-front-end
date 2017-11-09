@@ -8,7 +8,7 @@
           <br><br>
           {{#each survey.questions as |question|}}
           <div data-id="{{question.id}}" class="{{survey.id}}">
-            <input type="text" id="question" name="surveyresponse[questions.questionDescription]" size="50" placeholder={{question.question.questionDescription}}><br>
+            <input type="text" id="question" name="question.question.questionDescription" size="50" placeholder="{{question.question.questionDescription}}"><br>
               <input type="radio" value="Strongly&nbsp;Disagree" name="surveyresponse[question.answer[][{{@index}}]]"> Strongly Disagree<br>
               <input type="radio" value="Disagree" name="surveyresponse[question.answer[][{{@index}}]]"> Disagree<br>
               <input type="radio" value="Neutral" name="surveyresponse[question.answer[][{{@index}}]]"> Neutral<br>

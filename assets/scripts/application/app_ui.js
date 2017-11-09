@@ -114,6 +114,7 @@ const onUpdateSurveyFailure = function () {
 }
 
 const onTakeSurveySuccess = function (data) {
+  console.log('what is coming back??', data)
   const showSurveyHtml = showSurveyTemplate({ surveys: data })
   $('#display_survey').removeClass('hidden')
   $('#result').show().html('Got the survey.').fadeOut(8000)

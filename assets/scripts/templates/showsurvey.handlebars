@@ -9,7 +9,7 @@
           <br>
           {{#each survey.questions as |question|}}
           <div data-id={{question.id}}>
-            <input type="text" id="question" name="survey[questions.question1.questionDescription]" size="50" placeholder={{question.question.questionDescription}} required><br>
+            <input type="text" id="question" name="survey[questions.question1.questionDescription]" size="50" placeholder="{{question.question.questionDescription}}" required><br>
             <input type="radio" value="disagree" disabled> Disagree<br>
             <input type="radio" value="neutral" disabled> Neutral<br>
             <input type="radio" value="agree" disabled> Agree<br>
