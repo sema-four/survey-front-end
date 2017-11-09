@@ -49,7 +49,6 @@ $('select').change(function () {
       showQuestionsHtml = getQuestionsHTML(val)
     }
   })
-  console.log('do i have questions???', showQuestionsHtml)
   $('#dynamicQuestions').html(showQuestionsHtml)
 })
 
@@ -68,7 +67,6 @@ const onGetUserSurveys = function (id) {
 const onCreateSurvey = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
-  console.log('Event data is', data)
   appApi.createSurvey(data)
     .then(appUi.onCreateSurveySuccess)
     .catch(appUi.onCreateSurveyFailure)
@@ -86,7 +84,6 @@ const onDeleteSurvey = function (event) {
 const onShowUpdate = function (event) {
   event.preventDefault()
   const id = $(event.target).data('id')
-  console.log('event & id:')
   appApi.getSurvey(id)
     .then(appUi.showUpdateForm)
 }
@@ -99,7 +96,6 @@ const onUpdateDone = function (event) {
 const onUpdateSurvey = function (event) {
   event.preventDefault()
   const id = store.survey.id
-  console.log('The ID is', id)
   const data = getFormFields(this)
   appApi.updateSurvey(data, id)
     .then(appUi.onUpdateSurveySuccess)

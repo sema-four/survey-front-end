@@ -11,7 +11,6 @@ const onSignUp = function (event) {
   const data = getFormFields(this)
   event.preventDefault()
   if (data.credentials.password !== data.credentials.password_confirmation) {
-  //  console.log('sign-up', data)
     ui.notSamePw()
   } else {
     api.signUp(data)
@@ -24,8 +23,6 @@ const onSignUp = function (event) {
 const onSignIn = function (event) {
   const data = getFormFields(this)
   event.preventDefault()
-  // console.log('sign-in', data)
-  //  console.log(data)
   api.signIn(data)
     .then(ui.signInSuccess)
     .catch(ui.signInFailure)
@@ -36,8 +33,6 @@ const onSignIn = function (event) {
 const onSignOut = function (event) {
   const data = getFormFields(this)
   event.preventDefault()
-  // console.log('onSignOut: ', data)
-  //  console.log(data)
   api.signOut(data)
     .then(ui.signOutSuccess)
     .then(appEvents.onGetSurveys)
@@ -47,10 +42,7 @@ const onSignOut = function (event) {
 // for change password
 const onChangePassword = function (event) {
   event.preventDefault()
-  // console.log('change password ran!')
   const data = getFormFields(this)
-  // console.log(data)
-  // console.log(data.passwords.old, data.passwords.new)
   if (data.passwords.old === data.passwords.new) {
     // below calls a specific error message telling user new and old passwords
     // are the same and that they need to be differenet

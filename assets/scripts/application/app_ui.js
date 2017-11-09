@@ -52,8 +52,6 @@ const onCreateSurveyFailure = function () {
 
 const onGetUserSurveysSuccess = function (data) {
   const id = store.user.id
-  console.log('User is is', id)
-  console.log('Surveys:', data.surveys)
   let titles = ''
   for (let i = 0; i < data.surveys.length; i++) {
     if (id === data.surveys[i]._owner) {
@@ -78,9 +76,7 @@ const onDeleteSurveyFailure = function () {
 
 const showUpdateForm = function (data) {
   const showSurveyHtml = showSurveyUpdateTemplate({ surveys: data })
-  console.log('data is:', data)
   store.survey = data.survey
-  console.log('Store questions length is', store.survey.questions.length)
   if (store.survey.questions.length > 4) {
     $('#submit-update, #update-question-title, #update-label').addClass('hidden')
     $('#feedback').html('Sorry, you have reached the max number of questions.')

@@ -30,7 +30,6 @@ const deleteSurvey = function (id) {
 
 const updateSurvey = function (data, id) {
   const newQuestion = data.survey['questions.question.questionDescription']
-  console.log('expected array is: ', store.survey.questions)
   const newQuestionJson = {
     'survey': {
       'title': store.survey.title,
@@ -38,7 +37,6 @@ const updateSurvey = function (data, id) {
     }
   }
   for (let i = 0; i < store.survey.questions.length; i++) {
-    console.log('Store.surveys.questions is', store.survey.questions)
     newQuestionJson.survey.questions.push({
       'question': {
         'questionDescription': store.survey.questions[i].question.questionDescription,
@@ -55,8 +53,6 @@ const updateSurvey = function (data, id) {
     }
   }
   )
-  console.log('newQuestionJson is: ', newQuestionJson.survey.questions)
-  console.log('our expected json', newQuestionJson)
   return $.ajax({
     url: config.apiOrigin + '/surveys/' + id,
     method: 'PATCH',
@@ -109,7 +105,6 @@ const getQuestionJson = function (stuff) {
       }
     })
   }
-  console.log('Questions JSON is:', questionsJson)
   return questionsJson
 }
 

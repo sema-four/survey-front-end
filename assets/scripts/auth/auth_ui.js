@@ -18,7 +18,6 @@ const signUpFailure = function (error) {
 }
 
 const signInSuccess = function (data) {
-  console.log('signInSuccess called:', data)
   $('#result').show().html('You have signed in successfully').fadeOut(8000)
   $('#lndingpg_create_survey').addClass('hidden')
   $('#lndingpg_view_dashboard').removeClass('hidden')
