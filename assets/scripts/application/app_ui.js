@@ -107,7 +107,6 @@ const onUpdateSurveySuccess = function () {
   $('#result').show().html('Your survey has been updated.').fadeOut(8000)
   $(':input', '#update-survey-form').val('')
   $('#question-title').val('')
->>>>>>> development
 }
 
 const onUpdateSurveyFailure = function () {

@@ -140,13 +140,10 @@ const addHandlers = function () {
     onShowUpdate(e)
   })
   $('#update-survey-form').on('submit', onUpdateSurvey)
-<<<<<<< HEAD
-=======
   $('#done-button').on('click', onUpdateDone)
   // $(document).on('submit', '#update-survey-form', function (e) {
   //   onUpdateSurvey(e)
   // })
->>>>>>> development
   $(document).on('click', '#take-survey', function (e) {
     onSubmitSurvey(e)
   })
