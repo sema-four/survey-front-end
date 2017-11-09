@@ -1,6 +1,7 @@
 'use strict'
 const store = require('./../store')
 const showSurveysTemplate = require('../templates/surveys.handlebars')
+const showSurveyTemplate = require('../templates/takesurvey.handlebars')
 const toggleCreateSurvey = function () {
   $('#lndingpg_view_dashboard').addClass('hidden')
   $('#lndingpg_survey_list').addClass('hidden')
@@ -68,6 +69,18 @@ const onUpdateSurveySuccess = function () {
 const onUpdateSurveyFailure = function () {
   $('#result').show().html('Could <span style="color:#f4c542 ">not</span> update survey.').fadeOut(8000)
 }
+
+const onTakeSurveySuccess = function (data) {
+  console.log('survey here...', data.survey)
+  const showSurveyHtml = showSurveyTemplate({ surveys: data })
+  console.log('did i get survey html', showSurveyHtml)
+  $('#result').show().html('Got the survey.').fadeOut(8000)
+}
+
+const onTakeSurveyFailure = function () {
+  $('#result').show().html('Could <span style="color:#f4c542 ">not</span> get the survey.').fadeOut(8000)
+}
+
 module.exports = {
   toggleSurveyList,
   toggleDashboard,
@@ -80,6 +93,8 @@ module.exports = {
   onGetUserSurveyFailure,
   onDeleteSurveySuccess,
   onDeleteSurveyFailure,
+  onTakeSurveySuccess,
+  onTakeSurveyFailure,
   onUpdateSurveySuccess,
   onUpdateSurveyFailure,
   showUpdateForm
