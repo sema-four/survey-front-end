@@ -22,8 +22,8 @@ const signInSuccess = function (data) {
   $('#result').show().html('You have signed in successfully').fadeOut(8000)
   $('#lndingpg_create_survey').addClass('hidden')
   $('#lndingpg_view_dashboard').removeClass('hidden')
+  $('#page-header').removeClass('hidden')
   $('#lndingpg_survey_list').addClass('hidden')
-  // we have to store the user data or header somwhere.  sto we will put it in ../store.js
   $('#signUpModal').modal('hide')
   $('#sign-in-register, #infoMessage').addClass('hidden')
   $('#create-survey, #view-dashboard, #view-surveys').removeClass('hidden')
@@ -40,14 +40,14 @@ const signInFailure = function (error) {
 const signOutSuccess = function () {
   $('#lndingpg_create_survey').addClass('hidden')
   $('#lndingpg_view_dashboard').addClass('hidden')
-  $('#lndingpg_survey_list').removeClass('hidden')
+  $('#lndingpg_survey_list').addClass('hidden')
+  $('#lndingpg_update_survey').addClass('hidden')
+  $('#page-header').addClass('hidden')
   $('#sign-in-register, #infoMessage').removeClass('hidden')
   authHelper.setSignOutSuccessShowHide()
   $(':input', '#sign-in').val('')
   $('#result').show().html('You have signed out successfully').fadeOut(8000)
-  // for navigation to surveys, dashboard, or create survey
   $('#create-survey, #view-dashboard, #view-surveys').addClass('hidden')
-  // need to clear memory of the user information which includes token and auth header
   store.user = null
 }
 

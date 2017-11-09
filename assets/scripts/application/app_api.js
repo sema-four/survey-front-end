@@ -3,8 +3,6 @@
 const config = require('../config')
 const store = require('../store')
 
-console.log('The URL is ', config.apiOrigin)
-
 const getSurveys = function (data) {
   return $.ajax({
     url: config.apiOrigin + '/surveys',
@@ -31,14 +29,41 @@ const deleteSurvey = function (id) {
 }
 
 const updateSurvey = function (data, id) {
-  const quesJson = getQuestionJson(data)
+  const newQuestion = data.survey['questions.question.questionDescription']
+  console.log('expected array is: ', store.survey.questions)
+  const newQuestionJson = {
+    'survey': {
+      'title': store.survey.title,
+      'questions': []
+    }
+  }
+  for (let i = 0; i < store.survey.questions.length; i++) {
+    console.log('Store.surveys.questions is', store.survey.questions)
+    newQuestionJson.survey.questions.push({
+      'question': {
+        'questionDescription': store.survey.questions[i].question.questionDescription,
+        'options': store.survey.questions[i].question.options,
+        'active': store.survey.questions[i].question.active
+      }
+    })
+  }
+  newQuestionJson.survey.questions.push({
+    'question': {
+      'questionDescription': newQuestion,
+      'options': ["['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]"],
+      'active': true
+    }
+  }
+  )
+  console.log('newQuestionJson is: ', newQuestionJson.survey.questions)
+  console.log('our expected json', newQuestionJson)
   return $.ajax({
-    url: config.apiOrigin + '/surveys' + id,
+    url: config.apiOrigin + '/surveys/' + id,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token
     },
-    data: quesJson
+    data: newQuestionJson
   })
 }
 

@@ -23,7 +23,7 @@
               <span class="icon-bar">&nbsp;</span>
             </button>
             <!-- <a class="navbar-brand" href="#">Survey Says!</a> -->
-            <img class="main-logo" src="https://i.imgur.com/dvjXlkQ.png" title="source: imgur.com" />
+            <img class="main-logo" src="https://i.imgur.com/dvjXlkQ.png" alt="Survey Says Logo" title="source: imgur.com" />
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -44,7 +44,7 @@
       </nav>
           <div id="container" class="container-fluid">
             <h5 id="result"></h5><br>
-            <h4 id="page-header"></h4><br>
+            <h4 id="page-header" class="row hidden"></h4><br>
             <!-- <h5 id="infoMessage">Please sign in to create a survey of your own.</h5> -->
             <div class="container-fluid bg-3">
               <div id="lndingpg_create_survey" class="row hidden">
@@ -66,66 +66,20 @@
                     <br><br>
                     <label for="question-number">How many questions?</label>
                     <select id="question-number">
+                      <option value="0">Select</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
                       <option value="5">5</option>
                     </select>
-                    <div id="question1">
-                      <label for="question-1-title">Question 1:</label>
-                      <input type="text" id="question-1-title" name="survey[questions.question.questionDescription[][0]]" size="50" placeholder="Add question here" required><br>
-                      <input type="radio" value="strongly-disagree" checked> Strongly Disgree<br>
-                      <input type="radio" value="disagree" checked> Disagree<br>
-                      <input type="radio" value="neutral" checked> Neutral<br>
-                      <input type="radio" value="agree" checked> Agree<br>
-                      <input type="radio" value="strongly-agree" checked> Strongly Agree<br>
-                      <br>
-                   </div>
-                   <div id="question2" class="hidden">
-                     <label for="question-2-title">Question 2:</label>
-                     <input type="text" id="question-2-title" name="survey[questions.question.questionDescription[][1]]" size="50"placeholder="Add question here"  disabled>
-                     <br>
-                     <input type="radio" value="strongly-disagree" checked disabled> Strongly Disagree<br>
-                     <input type="radio" value="disagree" checked disabled> Disagree<br>
-                     <input type="radio" value="neutral" checked disabled> Neutral<br>
-                     <input type="radio" value="agree" checked disabled> Agree<br>
-                     <input type="radio" value="strongly-agree" checked disabled> Strongly Agree<br>
-                     <br>
-                   </div>
-                   <div id="question3" class="hidden">
-                     <label for="question-3-title">Question 3:</label>
-                     <input type="text" name="survey[questions.question.questionDescription[][2]]" id="question-3-title" size="50"placeholder="Add question here"  disabled>
-                     <br>
-                     <input type="radio" value="strongly-disagree" checked disabled> Strongly Disagree<br>
-                     <input type="radio" value="disagree" checked disabled> Disagree<br>
-                     <input type="radio" value="neutral" checked disabled> Neutral<br>
-                     <input type="radio" value="agree" checked disabled> Agree<br>
-                     <input type="radio" value="strongly-agree" checked disabled> Strongly Agree<br>
-                     <br>
-                   </div>
-                   <div id="question4" class="hidden">
-                     <label for="question-4-title">Question 4:</label>
-                     <input type="text" name="survey[questions.question.questionDescription[][3]]" id="question-4-title" size="50"placeholder="Add question here"  disabled>
-                     <br>
-                     <input type="radio" value="strongly-disagree" checked disabled> Strongly Disagree<br>
-                     <input type="radio" value="disagree" checked disabled> Disagree<br>
-                     <input type="radio" value="neutral" checked disabled> Neutral<br>
-                     <input type="radio" value="agree" checked disabled> Agree<br>
-                     <input type="radio" value="strongly-agree" checked disabled> Strongly Agree<br>
-                     <br>
-                   </div>
-                   <div id="question5" class="hidden">
-                     <label for="question-5-title">Question 5:</label>
-                     <input type="text" name="survey[questions.question.questionDescription[][4]]]" id="question-5-title" size="50"placeholder="Add question here"  disabled>
-                     <br>
-                     <input type="radio" value="strongly-disagree" checked disabled> Strongly Disagree<br>
-                     <input type="radio" value="disagree" checked disabled> Disagree<br>
-                     <input type="radio" value="neutral" checked disabled> Neutral<br>
-                     <input type="radio" value="agree" checked disabled> Agree<br>
-                     <input type="radio" value="strongly-agree" checked disabled> Strongly Agree<br>
-                     <br>
-                   </div>
+                    <br>
+                    <br>
+                    <h5>Each question will allow 1 of 5 responses: Strongly Disagree, Disagree, Neutral, Agree, Strongly Agree</h5>
+                    <br>
+                    <div id="dynamicQuestions"> </div>
+                    <br>
+                    <br>
                    <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Submit Survey">Submit Survey</button>
                  </fieldset>
                </form>
@@ -133,8 +87,26 @@
              <div id="lndingpg_view_dashboard" class="row hidden">
              <!-- List of surveys here-->
             </div>
-            <div id="lndingpg_survey_list" class="row">
+            <div id="lndingpg_update_survey" class="row hidden">
+            <!-- Update Survey / Add Question Form -->
+            <div id="show-survey-area"></div>
+            <form id="update-survey-form">
+              <fieldset>
+                <legend>Add a Question!</legend>
+                <h5 id="feedback"></h5>
+                <label for="update-question-title"id="update-label">New Question:</label><br>
+                <input type="text" id="update-question-title" name="survey[questions.question.questionDescription]" size="50" placeholder="Add question here" required>
+                <br>
+                <br>
+                <button type="submit" id="submit-update" class="btn btn-primary btn-sm" name="submit" value="Add Question">Add Question</button>
+                <button id="done-button" type="click" class="btn btn-primary btn-sm" name="click" value="Done">Done</button>
+              </fieldset>
+            </form>
+
+          </div>
+            <div id="lndingpg_survey_list" class="row hidden" >
             <!-- List of surveys here-->
+
           </div>
           <div id="display_survey">
           <!-- Display survey here-->
@@ -165,7 +137,7 @@
                 <input type="text" name="credentials[email]" placeholder="Email here" required>
                 <input type="password" name="credentials[password]" placeholder="Password here" required>
                 <input type="password" name="credentials[password_confirmation]" placeholder="Password conformation here" required><br><br>
-                <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Sign up">
+                <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Sign up">Sign Up</button>
               </fieldset>
             </form>
             <!-- Change Password Form  -->
@@ -174,7 +146,7 @@
                 <legend>Change Password!</legend>
                 <input type="password" name="passwords[old]" placeholder="Old password here" required>
                 <input type="password" name="passwords[new]" placeholder="New password here" required>
-                <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Change Password">
+                <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Change Password">Change Password</button>
               </fieldset>
             </form>
             <!-- Sign In Form  -->
@@ -183,7 +155,7 @@
                 <legend>Sign In!</legend>
                 <input type="text" name="credentials[email]" placeholder="Email here" required>
                 <input type="password" name="credentials[password]" placeholder="Password here" required>
-                <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Sign in">
+                <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Sign in">Sign In</button>
               </fieldset>
             </form><br>
             <div class="modal-footer">
@@ -194,6 +166,7 @@
         </div>
       </div>
     </div>
+    <div id="banner"><img class="center-block" src="https://i.imgur.com/n7HcLVF.png"> </div>
     <footer>
       <hr>
       <h6>Brought to you by:</h6>

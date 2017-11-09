@@ -1,6 +1,6 @@
 'use strict'
 
-// const store = require('./../store')
+const store = require('./../store')
 const getFormFields = require('../../../lib/get-form-fields')
 const appUi = require('./app_ui')
 const appApi = require('./app_api')
@@ -34,33 +34,23 @@ $('select').change(function () {
   $('select option:selected').each(function () {
     if ($(this).val() === '1') {
       val = $(this).val()
-      // $('#question2, #question3, #quetion4, #question5').addClass('hidden')
       showQuestionsHtml = getQuestionsHTML(val)
     } else if ($(this).val() === '2') {
       val = $(this).val()
-      // $('#question2').removeClass('hidden')
-      // $('#question3, #question4, #question5').addClass('hidden')
       showQuestionsHtml = getQuestionsHTML(val)
     } else if ($(this).val() === '3') {
       val = $(this).val()
-      // $('#question2, #question3').removeClass('hidden')
-      // $('#question4, #question5').addClass('hidden')
       showQuestionsHtml = getQuestionsHTML(val)
     } else if ($(this).val() === '4') {
       val = $(this).val()
-      // $('#question2, #question3, #question4').removeClass('hidden')
-      // $('#question5').addClass('hidden')
       showQuestionsHtml = getQuestionsHTML(val)
     } else if ($(this).val() === '5') {
       val = $(this).val()
-      // $('#question2, #question3, #question4, #question5').removeClass('hidden')
       showQuestionsHtml = getQuestionsHTML(val)
     }
   })
-  // const showQuestionsHtml = createQuestionsTemplate({ $(this).val() })
   console.log('do i have questions???', showQuestionsHtml)
-
-  $('#create-survey-form').html(showQuestionsHtml)
+  $('#dynamicQuestions').html(showQuestionsHtml)
 })
 
 const onGetSurveys = function (data) {
@@ -87,21 +77,33 @@ const onCreateSurvey = function (event) {
 const onDeleteSurvey = function (event) {
   event.preventDefault()
   const id = $(event.target).data('id')
-  console.log('Guys the ID is', id)
-  console.log(event)
-  console.log(event.target)
   appApi.deleteSurvey(id)
     .then(appUi.onDeleteSurveySuccess)
     .then(onGetUserSurveys)
     .catch(appUi.onDeleteSurveyFailure)
 }
-const onUpdateSurvey = function (event) {
+
+const onShowUpdate = function (event) {
   event.preventDefault()
   const id = $(event.target).data('id')
+  console.log('event & id:')
+  appApi.getSurvey(id)
+    .then(appUi.showUpdateForm)
+}
+
+const onUpdateDone = function (event) {
+  event.preventDefault()
+  appUi.closeUpdate()
+}
+
+const onUpdateSurvey = function (event) {
+  event.preventDefault()
+  const id = store.survey.id
+  console.log('The ID is', id)
   const data = getFormFields(this)
   appApi.updateSurvey(data, id)
     .then(appUi.onUpdateSurveySuccess)
-    .then(onGetUserSurveys)
+    // .then(appUi.showUpdateForm)
     .catch(appUi.onUpdateSurveyFailure)
 }
 
@@ -137,8 +139,13 @@ const addHandlers = function () {
     onTakeSurvey(e)
   })
   $(document).on('click', '#update-survey', function (e) {
-    onUpdateSurvey(e)
+    onShowUpdate(e)
   })
+  $('#update-survey-form').on('submit', onUpdateSurvey)
+  $('#done-button').on('click', onUpdateDone)
+  // $(document).on('submit', '#update-survey-form', function (e) {
+  //   onUpdateSurvey(e)
+  // })
   $(document).on('click', '#take-survey', function (e) {
     onSubmitSurvey(e)
   })

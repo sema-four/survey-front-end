@@ -1,0 +1,26 @@
+{{#each surveys as |survey|}}
+
+  <div class="container-fluid bg-3">
+    <div id="lndingpg_take_survey" class="row">
+      <form id='take-survey-form'>
+        <fieldset>
+          <legend>Update Survey - {{survey.title}}</legend>
+          <h5>Questions already in your survey</h5>
+          <br>
+          {{#each survey.questions as |question|}}
+          <div data-id={{question.id}}>
+            <input type="text" id="question" name="survey[questions.question1.questionDescription]" size="50" placeholder={{question.question.questionDescription}} required><br>
+            <input type="radio" value="disagree" disabled> Disagree<br>
+            <input type="radio" value="neutral" disabled> Neutral<br>
+            <input type="radio" value="agree" disabled> Agree<br>
+            <input type="radio" value="strongly-agree" disabled> Strongly Agree<br>
+            <input type="hidden" name="survey[questions.question1.active]" value="true">
+            <br>
+         </div>
+         {{/each}}
+       </fieldset>
+     </form>
+   </div>
+</div>
+
+{{/each}}

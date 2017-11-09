@@ -22,6 +22,13 @@ footer {
   text-align: center;
 }
 
+#banner {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #000098;
+}
+
 .team-logo {
   height: 40px;
   width: 222px;
@@ -30,4 +37,8 @@ footer {
 .main-logo {
   height: 70px;
   width: 154px;
+}
+
+#feedback {
+  color: red;
 }
