@@ -41,6 +41,7 @@ const signOutSuccess = function () {
   $('#lndingpg_create_survey').addClass('hidden')
   $('#lndingpg_view_dashboard').addClass('hidden')
   $('#lndingpg_survey_list').removeClass('hidden')
+  $('#lndingpg_update_survey').addClass('hidden')
   $('#sign-in-register, #infoMessage').removeClass('hidden')
   authHelper.setSignOutSuccessShowHide()
   $(':input', '#sign-in').val('')
