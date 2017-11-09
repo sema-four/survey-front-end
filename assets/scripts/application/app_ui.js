@@ -29,7 +29,9 @@ const onGetSurveyFailure = function () {
 }
 const onCreateSurveySuccess = function (data) {
   $('#result').show().html('Survey Created Successfully!').fadeOut(8000)
-  $(':input', '#create-survey-form').val('')
+  $('#dynamicQuestions').empty('')
+  $('#title').val('')
+  $('#question-number').val('Select')
 }
 const onCreateSurveyFailure = function () {
   $('#result').show().html('Survey could <span style="color:#f4c542 ">not</span> be created. Some fields may be missing').fadeOut(8000)
@@ -41,11 +43,11 @@ const onGetUserSurveysSuccess = function (data) {
   let titles = ''
   for (let i = 0; i < data.surveys.length; i++) {
     if (id === data.surveys[i]._owner) {
-      titles = titles + ' ' + data.surveys[i].title + '<br>' + "<button id='delete-survey' data-id=" + data.surveys[i].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>' + "<button id='update-survey' data-id=" + data.surveys[i].id + ' ' + "class='btn-info'>Update This Survey</button>"
+      titles = titles + ' ' + data.surveys[i].title + '<br>' + "<button id='delete-survey' data-id=" + data.surveys[i].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>' + "<button id='update-survey' data-id=" + data.surveys[i].id + ' ' + "class='btn-info'>Update This Survey</button>" + '<br><br>'
     }
   }
   $('#lndingpg_view_dashboard').html(titles)
-  $('#page-header').show().html('Here are all of your sruveys and their responses.')
+  $('#page-header').show().html('Here are all of your surveys and their responses.')
 }
 const onGetUserSurveyFailure = function () {
   $('#result').show().html('Could <span style="color:#f4c542 ">Not</span>find your surveys.').fadeOut(8000)
@@ -55,6 +57,10 @@ const onDeleteSurveySuccess = function () {
 }
 const onDeleteSurveyFailure = function () {
   $('#result').show().html('Could <span style="color:#f4c542 ">not</span> delete survey.').fadeOut(8000)
+}
+const showUpdateForm = function () {
+  $('#lndingpg_update_survey').removeClass('hidden')
+  $('#lndingpg_view_dashboard').addClass('hidden')
 }
 const onUpdateSurveySuccess = function () {
   $('#result').show().html('Your survey has been updated.').fadeOut(8000)
@@ -75,5 +81,6 @@ module.exports = {
   onDeleteSurveySuccess,
   onDeleteSurveyFailure,
   onUpdateSurveySuccess,
-  onUpdateSurveyFailure
+  onUpdateSurveyFailure,
+  showUpdateForm
 }

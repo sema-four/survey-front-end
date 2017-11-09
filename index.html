@@ -66,66 +66,18 @@
                     <br><br>
                     <label for="question-number">How many questions?</label>
                     <select id="question-number">
+                      <option value="0">Select</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
                       <option value="5">5</option>
                     </select>
-                    <div id="question1">
-                      <label for="question-1-title">Question 1:</label>
-                      <input type="text" id="question-1-title" name="survey[questions.question.questionDescription[][0]]" size="50" placeholder="Add question here" required><br>
-                      <input type="radio" value="strongly-disagree" checked> Strongly Disgree<br>
-                      <input type="radio" value="disagree" checked> Disagree<br>
-                      <input type="radio" value="neutral" checked> Neutral<br>
-                      <input type="radio" value="agree" checked> Agree<br>
-                      <input type="radio" value="strongly-agree" checked> Strongly Agree<br>
-                      <br>
-                   </div>
-                   <div id="question2" class="hidden">
-                     <label for="question-2-title">Question 2:</label>
-                     <input type="text" id="question-2-title" name="survey[questions.question.questionDescription[][1]]" size="50"placeholder="Add question here"  disabled>
-                     <br>
-                     <input type="radio" value="strongly-disagree" checked disabled> Strongly Disagree<br>
-                     <input type="radio" value="disagree" checked disabled> Disagree<br>
-                     <input type="radio" value="neutral" checked disabled> Neutral<br>
-                     <input type="radio" value="agree" checked disabled> Agree<br>
-                     <input type="radio" value="strongly-agree" checked disabled> Strongly Agree<br>
-                     <br>
-                   </div>
-                   <div id="question3" class="hidden">
-                     <label for="question-3-title">Question 3:</label>
-                     <input type="text" name="survey[questions.question.questionDescription[][2]]" id="question-3-title" size="50"placeholder="Add question here"  disabled>
-                     <br>
-                     <input type="radio" value="strongly-disagree" checked disabled> Strongly Disagree<br>
-                     <input type="radio" value="disagree" checked disabled> Disagree<br>
-                     <input type="radio" value="neutral" checked disabled> Neutral<br>
-                     <input type="radio" value="agree" checked disabled> Agree<br>
-                     <input type="radio" value="strongly-agree" checked disabled> Strongly Agree<br>
-                     <br>
-                   </div>
-                   <div id="question4" class="hidden">
-                     <label for="question-4-title">Question 4:</label>
-                     <input type="text" name="survey[questions.question.questionDescription[][3]]" id="question-4-title" size="50"placeholder="Add question here"  disabled>
-                     <br>
-                     <input type="radio" value="strongly-disagree" checked disabled> Strongly Disagree<br>
-                     <input type="radio" value="disagree" checked disabled> Disagree<br>
-                     <input type="radio" value="neutral" checked disabled> Neutral<br>
-                     <input type="radio" value="agree" checked disabled> Agree<br>
-                     <input type="radio" value="strongly-agree" checked disabled> Strongly Agree<br>
-                     <br>
-                   </div>
-                   <div id="question5" class="hidden">
-                     <label for="question-5-title">Question 5:</label>
-                     <input type="text" name="survey[questions.question.questionDescription[][4]]]" id="question-5-title" size="50"placeholder="Add question here"  disabled>
-                     <br>
-                     <input type="radio" value="strongly-disagree" checked disabled> Strongly Disagree<br>
-                     <input type="radio" value="disagree" checked disabled> Disagree<br>
-                     <input type="radio" value="neutral" checked disabled> Neutral<br>
-                     <input type="radio" value="agree" checked disabled> Agree<br>
-                     <input type="radio" value="strongly-agree" checked disabled> Strongly Agree<br>
-                     <br>
-                   </div>
+                    <br>
+                    <br>
+                    <div id="dynamicQuestions"> </div>
+                    <br>
+                    <br>
                    <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Submit Survey">Submit Survey</button>
                  </fieldset>
                </form>
@@ -133,6 +85,21 @@
              <div id="lndingpg_view_dashboard" class="row hidden">
              <!-- List of surveys here-->
             </div>
+            <div id="lndingpg_update_survey" class="row hidden">
+            <!-- Update Survey / Add Question Form -->
+            <div class="show-survey-area">
+            <form id="update-survey-form">
+              <fieldset>
+                <legend>Add a Question!</legend>
+                <label for="question-1-title">New Question:</label><br>
+                <input type="text" id="question-title" name="survey[questions.question.questionDescription[][0]]" size="50" placeholder="Add question here" required>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Add Question">Add Question</button>
+              </fieldset>
+            </form>
+          </div>
+          </div>
             <div id="lndingpg_survey_list" class="row">
             <!-- List of surveys here-->
           </div>
