@@ -42,6 +42,19 @@ const updateSurvey = function (data, id) {
   })
 }
 
+const submitSurvey = function (data, id) {
+  console.log('Are we calling submit????')
+  // const quesJson = getQuestionJson(data)
+  // return $.ajax({
+  //   url: config.apiOrigin + '/surveys' + id,
+  //   method: 'PATCH',
+  //   headers: {
+  //     Authorization: 'Token token=' + store.user.token
+  //   },
+  //   data: quesJson
+  // })
+}
+
 const getQuestionJson = function (stuff) {
   const descriptionArray = stuff.survey['questions.question.questionDescription']
   const optionsArray = stuff.survey['questions.question.options']
@@ -82,5 +95,6 @@ module.exports = {
   getSurvey,
   createSurvey,
   deleteSurvey,
-  updateSurvey
+  updateSurvey,
+  submitSurvey
 }
