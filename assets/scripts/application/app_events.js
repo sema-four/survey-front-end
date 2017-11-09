@@ -118,6 +118,14 @@ const onTakeSurvey = function (event) {
     // .then(onGetUserSurveys)
     .catch(appUi.onTakeSurveyFailure)
 }
+const onSubmitSurvey = function (event) {
+  event.preventDefault()
+  const id = $(event.target).data('id')
+  appApi.submitSurvey(id)
+    .then(appUi.onSubmitSurveySuccess)
+    // .then(onGetUserSurveys)
+    .catch(appUi.onSubmitSurveyFailure)
+}
 
 const addHandlers = function () {
   $('#create-survey').on('click', ontoggleCreateSurvey)
@@ -133,6 +141,9 @@ const addHandlers = function () {
   })
   $(document).on('click', '#update-survey', function (e) {
     appUi.showUpdateForm(e)
+  })
+  $(document).on('click', '#take-survey', function (e) {
+    onSubmitSurvey(e)
   })
 }
 
