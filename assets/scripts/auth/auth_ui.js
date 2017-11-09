@@ -38,7 +38,7 @@ const signInFailure = function (error) {
 }
 
 const signOutSuccess = function () {
-  $('#lndingpg_create_survey').addClass('hidden')
+  $('#lndingpg_create_survey, #display_survey').addClass('hidden')
   $('#lndingpg_view_dashboard').addClass('hidden')
   $('#lndingpg_survey_list').addClass('hidden')
   $('#lndingpg_update_survey').addClass('hidden')

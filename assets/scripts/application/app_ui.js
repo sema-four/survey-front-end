@@ -5,7 +5,7 @@ const showSurveyTemplate = require('../templates/takesurvey.handlebars')
 const showSurveyUpdateTemplate = require('../templates/showsurvey.handlebars')
 
 const toggleCreateSurvey = function () {
-  $('#lndingpg_view_dashboard').addClass('hidden')
+  $('#lndingpg_view_dashboard, #display_survey').addClass('hidden')
   $('#lndingpg_survey_list').addClass('hidden')
   $('#lndingpg_create_survey').removeClass('hidden')
   $('#page-header').show().html('Create a survey of your own.')
@@ -15,13 +15,13 @@ const toggleCreateSurvey = function () {
 const toggleDashboard = function () {
   $('#lndingpg_view_dashboard').removeClass('hidden')
   $('#page-header').show().html('Manage your survey.')
-  $('#lndingpg_survey_list').addClass('hidden')
+  $('#lndingpg_survey_list, #display_survey').addClass('hidden')
   $('#lndingpg_create_survey').addClass('hidden')
   $('#lndingpg_update_survey').addClass('hidden')
 }
 
 const toggleSurveyList = function () {
-  $('#lndingpg_view_dashboard').addClass('hidden')
+  $('#lndingpg_view_dashboard, #display_survey').addClass('hidden')
   $('#lndingpg_survey_list').removeClass('hidden')
   $('#lndingpg_create_survey').addClass('hidden')
   $('#page-header').show().html('Choose a survey to take.')
@@ -115,6 +115,7 @@ const onUpdateSurveyFailure = function () {
 
 const onTakeSurveySuccess = function (data) {
   const showSurveyHtml = showSurveyTemplate({ surveys: data })
+  $('#display_survey').removeClass('hidden')
   $('#result').show().html('Got the survey.').fadeOut(8000)
   $('#lndingpg_survey_list, #page-header').addClass('hidden')
   $('#display_survey').html(showSurveyHtml)
@@ -124,12 +125,13 @@ const onTakeSurveyFailure = function () {
 }
 
 const onSubmitSurveySuccess = function (data) {
-  console.error()
+  $('#display_survey').addClass('hidden')
+  $('#result').show().html('You have submitted survey successfully').fadeOut(8000)
 }
 
-const onSubmitSurveyFailure = function () {
-  // $('#result').show().html('Could <span style="color:#f4c542 ">not</span> get the survey.').fadeOut(8000)
-  console.error()
+const onSubmitSurveyFailure = function (error) {
+  $('#result').show().html('Could <span style="color:#f4c542 ">not</span> submit the survey response.').fadeOut(8000)
+  console.error(error)
 }
 module.exports = {
   toggleSurveyList,
