@@ -1,0 +1,28 @@
+Handlebars.registerHelper('times', function(n, block) {
+  var accum = ''
+  for(var i = 0; i < n; ++i)
+      accum += block.fn(i)
+  return accum
+})
+
+{{#times 3}}
+
+
+  <div id="survey-id" data-id="{{survey.id}}">
+    <h5 class="name-result">{{survey.title}}</h5>
+    <button class='take btn-info'>Take This Survey</button>
+  </div>
+  <br><br>
+
+  <div id="question{{data}}">
+    <label for="question-{{data}}-title">Question {{data}}:</label>
+    <input type="text" id="question-1-title" name="survey[questions.question.questionDescription[][{{data}}-1]]" size="50" placeholder="Add question here" required><br>
+    <input type="radio" value="strongly-disagree" checked> Strongly Disgree<br>
+    <input type="radio" value="disagree" checked> Disagree<br>
+    <input type="radio" value="neutral" checked> Neutral<br>
+    <input type="radio" value="agree" checked> Agree<br>
+    <input type="radio" value="strongly-agree" checked> Strongly Agree<br>
+    <br>
+ </div>
+
+{{/times}}

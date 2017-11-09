@@ -51,12 +51,16 @@
                 <form id='create-survey-form'>
                   <fieldset>
                     <legend>Create Survey!</legend>
-                    <input type="hidden" name="survey[questions.question1.active]" value="true">
-                    <input type="hidden" name="survey[questions.question2.active]" value="true">
-                    <input type="hidden" name="survey[questions.question3.active]" value="true">
-                    <input type="hidden" name="survey[questions.question1.options]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">
-                    <input type="hidden" name="survey[questions.question2.options]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">
-                    <input type="hidden" name="survey[questions.question3.options]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">
+                    <input type="hidden" name="survey[questions.question.active[][0]]" value="true">
+                    <input type="hidden" name="survey[questions.question.active[][1]]" value="true">
+                    <input type="hidden" name="survey[questions.question.active[][2]]" value="true">
+                    <input type="hidden" name="survey[questions.question.active[][3]]" value="true">
+                    <input type="hidden" name="survey[questions.question.active[][4]]" value="true">
+                    <input type="hidden" name="survey[questions.question.options[][0]]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">
+                    <input type="hidden" name="survey[questions.question.options[][1]]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">
+                    <input type="hidden" name="survey[questions.question.options[][2]]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">
+                      <input type="hidden" name="survey[questions.question.options[][3]]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">
+                        <input type="hidden" name="survey[questions.question.options[][4]]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">
                     <label for="title">Survey Title:</label>
                     <input type="text" id="title" name="survey[title]" placeholder="Add Survey Title Here!" required>
                     <br><br>
@@ -65,10 +69,12 @@
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
                     </select>
                     <div id="question1">
                       <label for="question-1-title">Question 1:</label>
-                      <input type="text" id="question-1-title" name="survey[questions.question1.questionDescription]" size="50" placeholder="Add question here" required><br>
+                      <input type="text" id="question-1-title" name="survey[questions.question.questionDescription[][0]]" size="50" placeholder="Add question here" required><br>
                       <input type="radio" value="strongly-disagree" checked> Strongly Disgree<br>
                       <input type="radio" value="disagree" checked> Disagree<br>
                       <input type="radio" value="neutral" checked> Neutral<br>
@@ -78,27 +84,49 @@
                    </div>
                    <div id="question2" class="hidden">
                      <label for="question-2-title">Question 2:</label>
-                     <input type="text" id="question-2-title" name="survey[questions.question2.questionDescription]" size="50"placeholder="Add question here" required>
+                     <input type="text" id="question-2-title" name="survey[questions.question.questionDescription[][1]]" size="50"placeholder="Add question here"  disabled>
                      <br>
-                     <input type="radio" value="strongly-disagree" checked> Strongly Disagree<br>
-                     <input type="radio" value="disagree" checked> Disagree<br>
-                     <input type="radio" value="neutral" checked> Neutral<br>
-                     <input type="radio" value="agree" checked> Agree<br>
-                     <input type="radio" value="strongly-agree" checked> Strongly Agree<br>
+                     <input type="radio" value="strongly-disagree" checked disabled> Strongly Disagree<br>
+                     <input type="radio" value="disagree" checked disabled> Disagree<br>
+                     <input type="radio" value="neutral" checked disabled> Neutral<br>
+                     <input type="radio" value="agree" checked disabled> Agree<br>
+                     <input type="radio" value="strongly-agree" checked disabled> Strongly Agree<br>
                      <br>
                    </div>
                    <div id="question3" class="hidden">
                      <label for="question-3-title">Question 3:</label>
-                     <input type="text" name="survey[questions.question3.questionDescription]" id="question-3-title" size="50"placeholder="Add question here" required>
+                     <input type="text" name="survey[questions.question.questionDescription[][2]]" id="question-3-title" size="50"placeholder="Add question here"  disabled>
                      <br>
-                     <input type="radio" value="strongly-disagree" checked> Strongly Disagree<br>
-                     <input type="radio" value="disagree" checked> Disagree<br>
-                     <input type="radio" value="neutral" checked> Neutral<br>
-                     <input type="radio" value="agree" checked> Agree<br>
-                     <input type="radio" value="strongly-agree" checked> Strongly Agree<br>
+                     <input type="radio" value="strongly-disagree" checked disabled> Strongly Disagree<br>
+                     <input type="radio" value="disagree" checked disabled> Disagree<br>
+                     <input type="radio" value="neutral" checked disabled> Neutral<br>
+                     <input type="radio" value="agree" checked disabled> Agree<br>
+                     <input type="radio" value="strongly-agree" checked disabled> Strongly Agree<br>
                      <br>
                    </div>
-                   <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Submit Survey">
+                   <div id="question4" class="hidden">
+                     <label for="question-4-title">Question 4:</label>
+                     <input type="text" name="survey[questions.question.questionDescription[][3]]" id="question-4-title" size="50"placeholder="Add question here"  disabled>
+                     <br>
+                     <input type="radio" value="strongly-disagree" checked disabled> Strongly Disagree<br>
+                     <input type="radio" value="disagree" checked disabled> Disagree<br>
+                     <input type="radio" value="neutral" checked disabled> Neutral<br>
+                     <input type="radio" value="agree" checked disabled> Agree<br>
+                     <input type="radio" value="strongly-agree" checked disabled> Strongly Agree<br>
+                     <br>
+                   </div>
+                   <div id="question5" class="hidden">
+                     <label for="question-5-title">Question 5:</label>
+                     <input type="text" name="survey[questions.question.questionDescription[][4]]]" id="question-5-title" size="50"placeholder="Add question here"  disabled>
+                     <br>
+                     <input type="radio" value="strongly-disagree" checked disabled> Strongly Disagree<br>
+                     <input type="radio" value="disagree" checked disabled> Disagree<br>
+                     <input type="radio" value="neutral" checked disabled> Neutral<br>
+                     <input type="radio" value="agree" checked disabled> Agree<br>
+                     <input type="radio" value="strongly-agree" checked disabled> Strongly Agree<br>
+                     <br>
+                   </div>
+                   <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Submit Survey">Submit Survey</button>
                  </fieldset>
                </form>
              </div>
