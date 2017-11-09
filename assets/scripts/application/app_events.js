@@ -63,6 +63,15 @@ const onDeleteSurvey = function (event) {
     .catch(appUi.onDeleteSurveyFailure)
 }
 
+const onTakeSurvey = function (event) {
+  event.preventDefault()
+  const id = $(event.target).data('id')
+  appApi.getSurvey(id)
+    .then(appUi.onTakeSurveySuccess)
+    // .then(onGetUserSurveys)
+    .catch(appUi.onTakeSurveyFailure)
+}
+
 const addHandlers = function () {
   $('#create-survey').on('click', ontoggleCreateSurvey)
   $('#view-dashboard').on('click', ontoggleDashboard)
@@ -71,6 +80,9 @@ const addHandlers = function () {
   $('#view-dashboard').on('click', onGetUserSurveys)
   $(document).on('click', '#delete-survey', function (e) {
     onDeleteSurvey(e)
+  })
+  $(document).on('click', '.take', function (e) {
+    onTakeSurvey(e)
   })
 }
 

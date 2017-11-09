@@ -69,6 +69,20 @@ const onDeleteSurveyFailure = function () {
   $('#result').show().html('Could <span style="color:#f4c542 ">not</span> delete surveys.').fadeOut(8000)
 }
 
+const onTakeSurveySuccess = function (data) {
+  // const id = store.user.id
+  // for (let i = 0; i < data.surveys.length; i++) {
+  //   if (id === data.surveys[i]._owner) {
+  //     titles = titles + ' ' + data.surveys[i].title + '<br>' + "<button id='delete-survey' data-id=" + data.surveys[i].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>'
+  //   }
+  console.log('did i get survey', data)
+  $('#result').show().html('Got the survey.').fadeOut(8000)
+}
+
+const onTakeSurveyFailure = function () {
+  $('#result').show().html('Could <span style="color:#f4c542 ">not</span> get the survey.').fadeOut(8000)
+}
+
 module.exports = {
   toggleSurveyList,
   toggleDashboard,
@@ -80,5 +94,7 @@ module.exports = {
   onGetUserSurveysSuccess,
   onGetUserSurveyFailure,
   onDeleteSurveySuccess,
-  onDeleteSurveyFailure
+  onDeleteSurveyFailure,
+  onTakeSurveySuccess,
+  onTakeSurveyFailure
 }

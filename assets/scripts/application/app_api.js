@@ -13,6 +13,13 @@ const getSurveys = function (data) {
   })
 }
 
+const getSurvey = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + '/surveys/' + id,
+    method: 'GET'
+  })
+}
+
 const deleteSurvey = function (id) {
   return $.ajax({
     url: config.apiOrigin + '/surveys/' + id,
@@ -105,6 +112,7 @@ const createSurvey = function (stuff) {
 
 module.exports = {
   getSurveys,
+  getSurvey,
   createSurvey,
   deleteSurvey
 }
