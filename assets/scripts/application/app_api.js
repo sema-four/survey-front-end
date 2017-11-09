@@ -23,6 +23,18 @@ const deleteSurvey = function (id) {
   })
 }
 
+const updateSurvey = function (data, id) {
+  const quesJson = getQuestionJson(data)
+  return $.ajax({
+    url: config.apiOrigin + '/surveys' + id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: quesJson
+  })
+}
+
 const getQuestionJson = function (stuff) {
   const descriptionArray = stuff.survey['questions.question.questionDescription']
   const optionsArray = stuff.survey['questions.question.options']
@@ -61,5 +73,6 @@ const createSurvey = function (stuff) {
 module.exports = {
   getSurveys,
   createSurvey,
-  deleteSurvey
+  deleteSurvey,
+  updateSurvey
 }

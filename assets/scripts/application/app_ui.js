@@ -41,7 +41,7 @@ const onGetUserSurveysSuccess = function (data) {
   let titles = ''
   for (let i = 0; i < data.surveys.length; i++) {
     if (id === data.surveys[i]._owner) {
-      titles = titles + ' ' + data.surveys[i].title + '<br>' + "<button id='delete-survey' data-id=" + data.surveys[i].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>'
+      titles = titles + ' ' + data.surveys[i].title + '<br>' + "<button id='delete-survey' data-id=" + data.surveys[i].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>' + "<button id='update-survey' data-id=" + data.surveys[i].id + ' ' + "class='btn-info'>Update This Survey</button>"
     }
   }
   $('#lndingpg_view_dashboard').html(titles)
@@ -54,7 +54,13 @@ const onDeleteSurveySuccess = function () {
   $('#result').show().html('Your survey has been deleted.').fadeOut(8000)
 }
 const onDeleteSurveyFailure = function () {
-  $('#result').show().html('Could <span style="color:#f4c542 ">not</span> delete surveys.').fadeOut(8000)
+  $('#result').show().html('Could <span style="color:#f4c542 ">not</span> delete survey.').fadeOut(8000)
+}
+const onUpdateSurveySuccess = function () {
+  $('#result').show().html('Your survey has been updated.').fadeOut(8000)
+}
+const onUpdateSurveyFailure = function () {
+  $('#result').show().html('Could <span style="color:#f4c542 ">not</span> update survey.').fadeOut(8000)
 }
 module.exports = {
   toggleSurveyList,
@@ -67,5 +73,7 @@ module.exports = {
   onGetUserSurveysSuccess,
   onGetUserSurveyFailure,
   onDeleteSurveySuccess,
-  onDeleteSurveyFailure
+  onDeleteSurveyFailure,
+  onUpdateSurveySuccess,
+  onUpdateSurveyFailure
 }
