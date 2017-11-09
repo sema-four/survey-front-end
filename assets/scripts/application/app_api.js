@@ -42,17 +42,27 @@ const updateSurvey = function (data, id) {
   })
 }
 
-const submitSurvey = function (data, id) {
-  console.log('Are we calling submit????')
+const submitSurvey = function (id) {
   // const quesJson = getQuestionJson(data)
-  // return $.ajax({
-  //   url: config.apiOrigin + '/surveys' + id,
-  //   method: 'PATCH',
-  //   headers: {
-  //     Authorization: 'Token token=' + store.user.token
-  //   },
-  //   data: quesJson
-  // })
+  const data = {
+    'surveyresponse': {
+      'surveyId': id,
+      'questions': [{
+        'questionDescription': 'question1',
+        'answer': 'N',
+        'questionId': '2312',
+        'anonymous': true
+      }]
+    }
+  }
+  return $.ajax({
+    url: config.apiOrigin + '/surveyresponses',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: data
+  })
 }
 
 const getQuestionJson = function (stuff) {

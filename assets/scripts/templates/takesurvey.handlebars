@@ -7,17 +7,17 @@
           <legend>Take Survey - {{survey.title}}</legend>
           <br><br>
           {{#each survey.questions as |question|}}
-          <div data-id={{question.id}}>
-            <input type="text" id="question" name="survey[questions.question1.questionDescription]" size="50" placeholder={{question.question.questionDescription}} required><br>
-            <input type="radio" value="disagree"> Disagree<br>
-            <input type="radio" value="neutral"> Neutral<br>
-            <input type="radio" value="agree"> Agree<br>
-            <input type="radio" value="strongly-agree"> Strongly Agree<br>
-            <input type="hidden" name="survey[questions.question1.active]" value="true">
+          <div data-id="{{question.id}}" class="{{survey.id}}">
+            <input type="text" id="question" name="surveyresponse[questions.questionDescription]" size="50" placeholder={{question.question.questionDescription}}><br>
+              <input type="radio" value="Strongly&nbsp;Disagree" name="surveyresponse[question.answer[][{{@index}}]]"> Strongly Disagree<br>
+              <input type="radio" value="Disagree" name="surveyresponse[question.answer[][{{@index}}]]"> Disagree<br>
+              <input type="radio" value="Neutral" name="surveyresponse[question.answer[][{{@index}}]]"> Neutral<br>
+              <input type="radio" value="Agree" name="surveyresponse[question.answer[][{{@index}}]]"> Agree<br>
+              <input type="radio" value="Strongly&nbsp;Agree" name="surveyresponse[question.answer[][{{@index}}]]"> Strongly Agree<br>
             <br>
          </div>
          {{/each}}
-         <input id="take-survey" data-id="{{survey.id}}" type="submit" class="btn btn-primary btn-sm" name="submit" value="Submit Survey">
+         <input id="take-survey" data-index="{{@index}}" data-id="{{survey.id}}" type="submit" class="btn btn-primary btn-sm take-survey" name="submit" value="Submit Survey">
        </fieldset>
      </form>
    </div>

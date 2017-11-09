@@ -4,7 +4,6 @@
 const getFormFields = require('../../../lib/get-form-fields')
 const appUi = require('./app_ui')
 const appApi = require('./app_api')
-// const createQuestionsTemplate = require('../templates/createQuestions.handlebars')
 
 const ontoggleCreateSurvey = function (event) {
   appUi.toggleCreateSurvey()
@@ -114,8 +113,10 @@ const onTakeSurvey = function (event) {
     // .then(onGetUserSurveys)
     .catch(appUi.onTakeSurveyFailure)
 }
+
 const onSubmitSurvey = function (event) {
   event.preventDefault()
+  // const data = getFormFields(event.currentTarget)
   const id = $(event.target).data('id')
   appApi.submitSurvey(id)
     .then(appUi.onSubmitSurveySuccess)

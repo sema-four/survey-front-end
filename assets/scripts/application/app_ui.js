@@ -2,6 +2,7 @@
 const store = require('./../store')
 const showSurveysTemplate = require('../templates/surveys.handlebars')
 const showSurveyTemplate = require('../templates/takesurvey.handlebars')
+
 const toggleCreateSurvey = function () {
   $('#lndingpg_view_dashboard').addClass('hidden')
   $('#lndingpg_survey_list').addClass('hidden')
@@ -67,6 +68,7 @@ const onUpdateSurveyFailure = function () {
 const onTakeSurveySuccess = function (data) {
   const showSurveyHtml = showSurveyTemplate({ surveys: data })
   $('#result').show().html('Got the survey.').fadeOut(8000)
+  $('#lndingpg_survey_list, #page-header').addClass('hidden')
   $('#display_survey').html(showSurveyHtml)
 }
 
@@ -74,6 +76,14 @@ const onTakeSurveyFailure = function () {
   $('#result').show().html('Could <span style="color:#f4c542 ">not</span> get the survey.').fadeOut(8000)
 }
 
+const onSubmitSurveySuccess = function (data) {
+  console.error()
+}
+
+const onSubmitSurveyFailure = function () {
+  // $('#result').show().html('Could <span style="color:#f4c542 ">not</span> get the survey.').fadeOut(8000)
+  console.error()
+}
 module.exports = {
   toggleSurveyList,
   toggleDashboard,
@@ -89,5 +99,7 @@ module.exports = {
   onTakeSurveySuccess,
   onTakeSurveyFailure,
   onUpdateSurveySuccess,
-  onUpdateSurveyFailure
+  onUpdateSurveyFailure,
+  onSubmitSurveySuccess,
+  onSubmitSurveyFailure
 }
