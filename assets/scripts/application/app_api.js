@@ -3,8 +3,6 @@
 const config = require('../config')
 const store = require('../store')
 
-console.log('The URL is ', config.apiOrigin)
-
 const getSurveys = function (data) {
   return $.ajax({
     url: config.apiOrigin + '/surveys',
@@ -31,9 +29,6 @@ const deleteSurvey = function (id) {
 }
 
 const updateSurvey = function (data, id) {
-  // console.log('update api data', data)
-  // console.log('data stored is;', store.survey)
-  // console.log('looking for the field: ', data.survey['questions.question.questionDescription'])
   const newQuestion = data.survey['questions.question.questionDescription']
   console.log('expected array is: ', store.survey.questions)
   const newQuestionJson = {

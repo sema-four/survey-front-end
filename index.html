@@ -23,7 +23,7 @@
               <span class="icon-bar">&nbsp;</span>
             </button>
             <!-- <a class="navbar-brand" href="#">Survey Says!</a> -->
-            <img class="main-logo" src="https://i.imgur.com/dvjXlkQ.png" title="source: imgur.com" />
+            <img class="main-logo" src="https://i.imgur.com/dvjXlkQ.png" alt="Survey Says Logo" title="source: imgur.com" />
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -75,6 +75,8 @@
                     </select>
                     <br>
                     <br>
+                    <h5>Each question will allow 1 of 5 responses: Strongly Disagree, Disagree, Neutral, Agree, Strongly Agree</h5>
+                    <br>
                     <div id="dynamicQuestions"> </div>
                     <br>
                     <br>
@@ -91,11 +93,12 @@
             <form id="update-survey-form">
               <fieldset>
                 <legend>Add a Question!</legend>
-                <label for="question-1-title">New Question:</label><br>
-                <input type="text" id="question-title" name="survey[questions.question.questionDescription]" size="50" placeholder="Add question here" required>
+                <h5 id="feedback"></h5>
+                <label for="update-question-title"id="update-label">New Question:</label><br>
+                <input type="text" id="update-question-title" name="survey[questions.question.questionDescription]" size="50" placeholder="Add question here" required>
                 <br>
                 <br>
-                <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Add Question">Add Question</button>
+                <button type="submit" id="submit-update" class="btn btn-primary btn-sm" name="submit" value="Add Question">Add Question</button>
               </fieldset>
             </form>
 
