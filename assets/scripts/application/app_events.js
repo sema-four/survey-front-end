@@ -96,11 +96,14 @@ const onDeleteSurvey = function (event) {
     .then(onGetUserSurveys)
     .catch(appUi.onDeleteSurveyFailure)
 }
+
 const onUpdateSurvey = function (event) {
   event.preventDefault()
   const id = $(event.target).data('id')
   const data = getFormFields(this)
   console.log('event & id:')
+  appApi.getSurvey(id)
+    .then(appUi)
   appApi.updateSurvey(data, id)
     .then(appUi.onUpdateSurveySuccess)
     .then(onGetUserSurveys)
