@@ -77,6 +77,7 @@ const showUpdateForm = function (data) {
 const closeUpdate = function () {
   $('#show-survey-area').addClass('hidden')
   $('#lndingpg_update_survey').addClass('hidden')
+  $('#question-title').val('')
   store.survey = null
   $('#lndingpg_view_dashboard').removeClass('hidden')
   $('#page-header').show().html('Manage your survey.')
@@ -84,6 +85,7 @@ const closeUpdate = function () {
 
 const onUpdateSurveySuccess = function () {
   $('#result').show().html('Your survey has been updated.').fadeOut(8000)
+  $('#question-title').val('')
 }
 const onUpdateSurveyFailure = function () {
   $('#result').show().html('Could <span style="color:#f4c542 ">not</span> update survey.').fadeOut(8000)
