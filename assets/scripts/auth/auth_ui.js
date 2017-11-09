@@ -22,6 +22,7 @@ const signInSuccess = function (data) {
   $('#result').show().html('You have signed in successfully').fadeOut(8000)
   $('#lndingpg_create_survey').addClass('hidden')
   $('#lndingpg_view_dashboard').removeClass('hidden')
+  $('#page-header').removeClass('hidden')
   $('#lndingpg_survey_list').addClass('hidden')
   $('#signUpModal').modal('hide')
   $('#sign-in-register, #infoMessage').addClass('hidden')
@@ -39,7 +40,9 @@ const signInFailure = function (error) {
 const signOutSuccess = function () {
   $('#lndingpg_create_survey').addClass('hidden')
   $('#lndingpg_view_dashboard').addClass('hidden')
-  $('#lndingpg_survey_list').removeClass('hidden')
+  $('#lndingpg_survey_list').addClass('hidden')
+  $('#lndingpg_update_survey').addClass('hidden')
+  $('#page-header').addClass('hidden')
   $('#sign-in-register, #infoMessage').removeClass('hidden')
   authHelper.setSignOutSuccessShowHide()
   $(':input', '#sign-in').val('')

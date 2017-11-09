@@ -14,6 +14,7 @@ const toggleCreateSurvey = function () {
 
 const toggleDashboard = function () {
   $('#lndingpg_view_dashboard').removeClass('hidden')
+  $('#page-header').show().html('Manage your survey.')
   $('#lndingpg_survey_list').addClass('hidden')
   $('#lndingpg_create_survey').addClass('hidden')
   $('#lndingpg_update_survey').addClass('hidden')
@@ -88,13 +89,25 @@ const showUpdateForm = function (data) {
     $('#feedback').html('')
   }
   $('#lndingpg_update_survey').removeClass('hidden')
+  $('#show-survey-area').removeClass('hidden')
   $('#show-survey-area').html(showSurveyHtml)
   $('#lndingpg_view_dashboard').addClass('hidden')
+}
+
+const closeUpdate = function () {
+  $('#show-survey-area').addClass('hidden')
+  $('#lndingpg_update_survey').addClass('hidden')
+  $('#question-title').val('')
+  store.survey = null
+  $('#lndingpg_view_dashboard').removeClass('hidden')
+  $('#page-header').show().html('Manage your survey.')
 }
 
 const onUpdateSurveySuccess = function () {
   $('#result').show().html('Your survey has been updated.').fadeOut(8000)
   $(':input', '#update-survey-form').val('')
+  $('#question-title').val('')
+>>>>>>> development
 }
 
 const onUpdateSurveyFailure = function () {
@@ -106,7 +119,6 @@ const onTakeSurveySuccess = function (data) {
   $('#result').show().html('Got the survey.').fadeOut(8000)
   $('#display_survey').html(showSurveyHtml)
 }
-
 const onTakeSurveyFailure = function () {
   $('#result').show().html('Could <span style="color:#f4c542 ">not</span> get the survey.').fadeOut(8000)
 }
@@ -127,5 +139,6 @@ module.exports = {
   onTakeSurveyFailure,
   onUpdateSurveySuccess,
   onUpdateSurveyFailure,
-  showUpdateForm
+  showUpdateForm,
+  closeUpdate
 }

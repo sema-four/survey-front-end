@@ -44,7 +44,7 @@
       </nav>
           <div id="container" class="container-fluid">
             <h5 id="result"></h5><br>
-            <h4 id="page-header"></h4><br>
+            <h4 id="page-header" class="row hidden"></h4><br>
             <!-- <h5 id="infoMessage">Please sign in to create a survey of your own.</h5> -->
             <div class="container-fluid bg-3">
               <div id="lndingpg_create_survey" class="row hidden">
@@ -98,13 +98,20 @@
                 <input type="text" id="update-question-title" name="survey[questions.question.questionDescription]" size="50" placeholder="Add question here" required>
                 <br>
                 <br>
+<<<<<<< HEAD
                 <button type="submit" id="submit-update" class="btn btn-primary btn-sm" name="submit" value="Add Question">Add Question</button>
+=======
+                <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Add Question">Add Question</button>
+                <button id="done-button" type="click" class="btn btn-primary btn-sm" name="click" value="Done">Done</button>
+
+>>>>>>> development
               </fieldset>
             </form>
 
           </div>
-            <div id="lndingpg_survey_list" class="row">
+            <div id="lndingpg_survey_list" class="row hidden" >
             <!-- List of surveys here-->
+
           </div>
           <div id="display_survey">
           <!-- Display survey here-->
@@ -135,7 +142,7 @@
                 <input type="text" name="credentials[email]" placeholder="Email here" required>
                 <input type="password" name="credentials[password]" placeholder="Password here" required>
                 <input type="password" name="credentials[password_confirmation]" placeholder="Password conformation here" required><br><br>
-                <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Sign up">
+                <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Sign up">Sign Up</button>
               </fieldset>
             </form>
             <!-- Change Password Form  -->
@@ -144,7 +151,7 @@
                 <legend>Change Password!</legend>
                 <input type="password" name="passwords[old]" placeholder="Old password here" required>
                 <input type="password" name="passwords[new]" placeholder="New password here" required>
-                <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Change Password">
+                <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Change Password">Change Password</button>
               </fieldset>
             </form>
             <!-- Sign In Form  -->
@@ -153,7 +160,7 @@
                 <legend>Sign In!</legend>
                 <input type="text" name="credentials[email]" placeholder="Email here" required>
                 <input type="password" name="credentials[password]" placeholder="Password here" required>
-                <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Sign in">
+                <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Sign in">Sign In</button>
               </fieldset>
             </form><br>
             <div class="modal-footer">
@@ -164,6 +171,7 @@
         </div>
       </div>
     </div>
+    <div id="banner"><img class="center-block" src="https://i.imgur.com/n7HcLVF.png"> </div>
     <footer>
       <hr>
       <h6>Brought to you by:</h6>
