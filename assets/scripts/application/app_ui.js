@@ -2,22 +2,26 @@
 const store = require('./../store')
 const showSurveysTemplate = require('../templates/surveys.handlebars')
 const showSurveyTemplate = require('../templates/takesurvey.handlebars')
+const showSurveyUpdateTemplate = require('../templates/showsurvey.handlebars')
 const toggleCreateSurvey = function () {
   $('#lndingpg_view_dashboard').addClass('hidden')
   $('#lndingpg_survey_list').addClass('hidden')
   $('#lndingpg_create_survey').removeClass('hidden')
   $('#page-header').show().html('Create a survey of your own.')
+  $('#lndingpg_update_survey').addClass('hidden')
 }
 const toggleDashboard = function () {
   $('#lndingpg_view_dashboard').removeClass('hidden')
   $('#lndingpg_survey_list').addClass('hidden')
   $('#lndingpg_create_survey').addClass('hidden')
+  $('#lndingpg_update_survey').addClass('hidden')
 }
 const toggleSurveyList = function () {
   $('#lndingpg_view_dashboard').addClass('hidden')
   $('#lndingpg_survey_list').removeClass('hidden')
   $('#lndingpg_create_survey').addClass('hidden')
   $('#page-header').show().html('Choose a survey to take.')
+  $('#lndingpg_update_survey').addClass('hidden')
 }
 const onGetSurveysSuccess = function (data) {
   store.surveys = data.surveys
@@ -59,8 +63,12 @@ const onDeleteSurveySuccess = function () {
 const onDeleteSurveyFailure = function () {
   $('#result').show().html('Could <span style="color:#f4c542 ">not</span> delete survey.').fadeOut(8000)
 }
-const showUpdateForm = function () {
+const showUpdateForm = function (data) {
+  console.log('data is:', data)
+  store.survey = data.survey
   $('#lndingpg_update_survey').removeClass('hidden')
+  const showSurveyHtml = showSurveyUpdateTemplate({ surveys: data })
+  $('#show-survey-area').html(showSurveyHtml)
   $('#lndingpg_view_dashboard').addClass('hidden')
 }
 const onUpdateSurveySuccess = function () {

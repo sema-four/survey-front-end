@@ -1,6 +1,6 @@
 'use strict'
 
-// const store = require('./../store')
+const store = require('./../store')
 const getFormFields = require('../../../lib/get-form-fields')
 const appUi = require('./app_ui')
 const appApi = require('./app_api')
@@ -97,13 +97,19 @@ const onDeleteSurvey = function (event) {
     .catch(appUi.onDeleteSurveyFailure)
 }
 
-const onUpdateSurvey = function (event) {
+const onShowUpdate = function (event) {
   event.preventDefault()
   const id = $(event.target).data('id')
-  const data = getFormFields(this)
   console.log('event & id:')
   appApi.getSurvey(id)
-    .then(appUi)
+    .then(appUi.showUpdateForm)
+}
+
+const onUpdateSurvey = function (event) {
+  event.preventDefault()
+  const id = store.survey.id
+  console.log('The ID is', id)
+  const data = getFormFields(this)
   appApi.updateSurvey(data, id)
     .then(appUi.onUpdateSurveySuccess)
     .then(onGetUserSurveys)
@@ -140,8 +146,12 @@ const addHandlers = function () {
     onTakeSurvey(e)
   })
   $(document).on('click', '#update-survey', function (e) {
-    appUi.showUpdateForm(e)
+    onShowUpdate(e)
   })
+  $('#update-survey-form').on('submit', onUpdateSurvey)
+  // $(document).on('submit', '#update-survey-form', function (e) {
+  //   onUpdateSurvey(e)
+  // })
   $(document).on('click', '#take-survey', function (e) {
     onSubmitSurvey(e)
   })

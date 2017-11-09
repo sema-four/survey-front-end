@@ -87,18 +87,18 @@
             </div>
             <div id="lndingpg_update_survey" class="row hidden">
             <!-- Update Survey / Add Question Form -->
-            <div class="show-survey-area">
+            <div id="show-survey-area"></div>
             <form id="update-survey-form">
               <fieldset>
                 <legend>Add a Question!</legend>
                 <label for="question-1-title">New Question:</label><br>
-                <input type="text" id="question-title" name="survey[questions.question.questionDescription[][0]]" size="50" placeholder="Add question here" required>
+                <input type="text" id="question-title" name="survey[questions.question.questionDescription]" size="50" placeholder="Add question here" required>
                 <br>
                 <br>
                 <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Add Question">Add Question</button>
               </fieldset>
             </form>
-          </div>
+
           </div>
             <div id="lndingpg_survey_list" class="row">
             <!-- List of surveys here-->
