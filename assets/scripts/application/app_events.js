@@ -112,11 +112,30 @@ const onTakeSurvey = function (event) {
     .catch(appUi.onTakeSurveyFailure)
 }
 
+const getSurveyResponse = (event) => {
+  const questions = []
+  const anonymous = store.user ? false : true
+  $('.' + $(event.target).data('id')).each((index, ele) => {
+    questions.push({
+      'questionDescription': $(ele).children('input:first').attr('placeholder'),
+      'answer': $(ele).children(':checked').val(),
+      'questionId': $(ele).data('id'),
+      'anonymous': anonymous
+    })
+  })
+  const data = {
+    'surveyresponse': {
+      'surveyId': $(event.target).data('id'),
+      'questions': questions
+    }
+  }
+  return data
+}
+
 const onSubmitSurvey = function (event) {
   event.preventDefault()
-  // const data = getFormFields(event.currentTarget)
-  const id = $(event.target).data('id')
-  appApi.submitSurvey(id)
+  const data = getSurveyResponse(event)
+  appApi.submitSurvey(data)
     .then(appUi.onSubmitSurveySuccess)
     // .then(onGetUserSurveys)
     .catch(appUi.onSubmitSurveyFailure)

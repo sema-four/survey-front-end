@@ -63,19 +63,7 @@ const updateSurvey = function (data, id) {
   })
 }
 
-const submitSurvey = function (id) {
-  // const quesJson = getQuestionJson(data)
-  const data = {
-    'surveyresponse': {
-      'surveyId': id,
-      'questions': [{
-        'questionDescription': 'question1',
-        'answer': 'N',
-        'questionId': '2312',
-        'anonymous': true
-      }]
-    }
-  }
+const submitSurvey = function (data) {
   return $.ajax({
     url: config.apiOrigin + '/surveyresponses',
     method: 'POST',
