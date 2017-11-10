@@ -18,6 +18,21 @@ const getSurvey = function (id) {
   })
 }
 
+const getSurveyResponses = function (id) {
+  const promise = $.Deferred()
+  $.ajax({
+    url: config.apiOrigin + '/survey-responses/' + id,
+    method: 'GET',
+    success: function (data) {
+      promise.resolve(data)
+    },
+    error: function (data) {
+      promise.reject(data)
+    }
+  })
+  return promise
+}
+
 const deleteSurvey = function (id) {
   return $.ajax({
     url: config.apiOrigin + '/surveys/' + id,
@@ -111,6 +126,7 @@ const createSurvey = function (stuff) {
 module.exports = {
   getSurveys,
   getSurvey,
+  getSurveyResponses,
   createSurvey,
   deleteSurvey,
   updateSurvey,
