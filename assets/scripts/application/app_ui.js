@@ -65,15 +65,17 @@ const onGetUserSurveysSuccess = function (data) {
   const id = store.user.id
   let titles = ''
   const promises = []
+  const userSurveys = []
   for (let i = 0; i < data.surveys.length; i++) {
     if (id === data.surveys[i]._owner) {
       promises.push(getRes(data.surveys[i].id))
+      userSurveys.push(data.surveys[i])
     }
   }
   Promise.all(promises)
     .then((results) => {
       for (let j = 0; j < results.length; j++) {
-        titles = titles + ' <strong>' + data.surveys[j].title + '</strong><br>Has (' + results[j] + ') response(s)<br>' + "<button id='delete-survey' data-id=" + data.surveys[j].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>' + "<button id='update-survey' data-id=" + data.surveys[j].id + ' ' + "class='btn-info'>Update This Survey</button>" + '<br><br>'
+        titles = titles + ' <strong>' + userSurveys[j].title + '</strong><br>Has (' + results[j] + ') response(s)<br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update This Survey</button>" + '<br><br>'
       }
       $('#lndingpg_view_dashboard').html(titles)
     })
