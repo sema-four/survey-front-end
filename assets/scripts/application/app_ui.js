@@ -55,10 +55,38 @@ const getRes = (id) => {
   return new Promise((resolve, reject) =>
     appApi.getSurveyResponses(id)
       .then((data) => {
-        resolve(data.surveyresponses.length)
+        resolve(data.surveyresponses)
       })
       .catch((new Error('some problem'))
       ))
+}
+
+const getSurveyStatistics = (responses) => {
+  const stats = {}
+  // Check if responses are there for the survey
+  if (responses.length > 0) {
+    for (let i = 0; i < responses.length; i++) {
+      $.each(responses[i].questions, function (key, val) {
+        // Check if questionId array exists in stats object
+        if (stats[val.questionId]) {
+          // Check if answer array exists in questionId array
+          if (stats[val.questionId][val.answer]) {
+            stats[val.questionId][val.answer].push(val.answer)
+          } else {
+            stats[val.questionId][val.answer] = []
+            stats[val.questionId][val.answer].push(val.answer)
+          }
+        } else {
+          // create an array in stats with array name as questionId
+          stats[val.questionId] = []
+          // create answer array in questionId array, with array name as answer
+          stats[val.questionId][val.answer] = []
+          stats[val.questionId][val.answer].push(val.answer)
+        }
+      })
+    }
+  }
+  return stats
 }
 
 const onGetUserSurveysSuccess = function (data) {
@@ -75,7 +103,14 @@ const onGetUserSurveysSuccess = function (data) {
   Promise.all(promises)
     .then((results) => {
       for (let j = 0; j < results.length; j++) {
-        titles = titles + ' <strong>' + userSurveys[j].title + '</strong><br>Has (' + results[j] + ') response(s)<br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update This Survey</button>" + '<br><br>'
+        // This function returns response stats for each survey
+        // right now we are not using the function
+        // All we need to do is iterate over each questionId and display response
+        // count responses for each question and make it look pretty :)
+        // Note: Do not call the function if there are no responses for a survey
+        // please delete these comments once display is implemented
+        getSurveyStatistics(results[j])
+        titles = titles + ' <strong>' + userSurveys[j].title + '</strong><br>Has (' + results[j].length + ') response(s)<br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update This Survey</button>" + '<br><br>'
       }
       $('#lndingpg_view_dashboard').html(titles)
     })
