@@ -140,7 +140,7 @@ const onGetUserSurveysSuccess = function (data) {
         // Note: Do not call the function if there are no responses for a survey
         // please delete these comments once display is implemented
         getSurveyStatistics(results[j])
-        titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><a data-target='#responsesModal' data-toggle='modal' href='#responsesModal'> Has (" + results[j].length + ') response(s)</a><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update This Survey</button>" + '<br><br>'
+        titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><a data-target='#responsesModal' data-toggle='modal' href='#responsesModal'> Has (" + results[j].length + ') response(s)</a><br>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update This Survey</button>" + '<br><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>'
       }
       $('#lndingpg_view_dashboard').html(titles)
       $('#strongly-disagree').html('Strongly Disagree: ' + filterStronglyDisagree.length)
