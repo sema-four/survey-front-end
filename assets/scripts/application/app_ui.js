@@ -90,34 +90,24 @@ const getSurveyStatistics = (responses) => {
   return stats
 }
 
-// Hard code response for testing purposes:
-const responses = ['Strongly Disagree', 'Agree', 'Agree', 'Neutral', 'Strongly Agree', 'Neutral']
-
-// Filter through and create array for each of the 5 response types:
-const isStronglyDisagree = function (responses) {
-  return responses === 'Strongly Disagree'
+const populateStats = function (survey, stats) {
+  for (let k = 0; k < survey.questions.length; k++) {
+    console.log('survey.quetions', survey.questions[k].id)
+    console.log('stats.questionId', stats[survey.questions[k].id])
+    // for (let l = 0; l < stats[survey.questions[k].id].length; l++) {
+      console.log('all answers', Object.keys(stats[survey.questions[k].id]))
+    // }
+    let answer = Object.keys(stats[survey.questions[k].id])
+    console.log('answer', answer)
+      $('#strongly-disagree').html(answer[k] + ' : ' + answer[k].length)
+      console.log('answer[k]', answer[k])
+      console.log('answer[k].length', answer[k].length)
+      // $('#disagree').html('Disagree: ' + filterDisagree.length)
+      // $('#neutral').html('Neutral: ' + filterNeutral.length)
+      // $('#agree').html('Agree: ' + filterAgree.length)
+      // $('#strongly-agree').html('Strongly Agree: ' + filterStronglyAgree.length)
+    }
 }
-const filterStronglyDisagree = responses.filter(isStronglyDisagree)
-
-const isDisagree = function (responses) {
-  return responses === 'Disagree'
-}
-const filterDisagree = responses.filter(isDisagree)
-
-const isNeutral = function (responses) {
-  return responses === 'Neutral'
-}
-const filterNeutral = responses.filter(isNeutral)
-
-const isAgree = function (responses) {
-  return responses === 'Agree'
-}
-const filterAgree = responses.filter(isAgree)
-
-const isStronglyAgree = function (responses) {
-  return responses === 'Strongly Agree'
-}
-const filterStronglyAgree = responses.filter(isStronglyAgree)
 
 const onGetUserSurveysSuccess = function (data) {
   const id = store.user.id
@@ -139,15 +129,18 @@ const onGetUserSurveysSuccess = function (data) {
         // count responses for each question and make it look pretty :)
         // Note: Do not call the function if there are no responses for a survey
         // please delete these comments once display is implemented
-        getSurveyStatistics(results[j])
+        if (results[j].length > 0) {
+          const stats = getSurveyStatistics(results[j])
+          populateStats(userSurveys[j], stats)
+        }
         titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><a data-target='#responsesModal' data-toggle='modal' href='#responsesModal'> Has (" + results[j].length + ') response(s)</a><br>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update This Survey</button>" + '<br><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>'
       }
       $('#lndingpg_view_dashboard').html(titles)
-      $('#strongly-disagree').html('Strongly Disagree: ' + filterStronglyDisagree.length)
-      $('#disagree').html('Disagree: ' + filterDisagree.length)
-      $('#neutral').html('Neutral: ' + filterNeutral.length)
-      $('#agree').html('Agree: ' + filterAgree.length)
-      $('#strongly-agree').html('Strongly Agree: ' + filterStronglyAgree.length)
+      // $('#strongly-disagree').html('Strongly Disagree: ' + filterStronglyDisagree.length)
+      // $('#disagree').html('Disagree: ' + filterDisagree.length)
+      // $('#neutral').html('Neutral: ' + filterNeutral.length)
+      // $('#agree').html('Agree: ' + filterAgree.length)
+      // $('#strongly-agree').html('Strongly Agree: ' + filterStronglyAgree.length)
     })
     .catch((e) => {
       console.error(e)
