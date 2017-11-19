@@ -87,6 +87,31 @@
              <div id="lndingpg_view_dashboard" class="row hidden">
              <!-- List of surveys here-->
             </div>
+            <!-- Detailed Responses Modal  -->
+            <div class="modal fade" id="responsesModal" tabindex="-1" role="dialog" aria-labelledby="responsesModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="responsesModalLabel">Response Breakdown:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- Display the detailed responses here -->
+                    <div id="detailedResponses"></div>
+                    <h5 id="strongly-disagree"></h5>
+                    <h5 id="disagree"></h5>
+                    <h5 id="neutral"></h5>
+                    <h5 id="agree"></h5>
+                    <h5 id="strongly-agree"></h5>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div id="lndingpg_update_survey" class="row hidden">
             <!-- Update Survey / Add Question Form -->
             <div id="show-survey-area"></div>

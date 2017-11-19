@@ -85,9 +85,39 @@ const getSurveyStatistics = (responses) => {
         }
       })
     }
+    console.log('Stats is', stats)
   }
   return stats
 }
+
+// Hard code response for testing purposes:
+const responses = ['Strongly Disagree', 'Agree', 'Agree', 'Neutral', 'Strongly Agree', 'Neutral']
+
+// Filter through and create array for each of the 5 response types:
+const isStronglyDisagree = function (responses) {
+  return responses === 'Strongly Disagree'
+}
+const filterStronglyDisagree = responses.filter(isStronglyDisagree)
+
+const isDisagree = function (responses) {
+  return responses === 'Disagree'
+}
+const filterDisagree = responses.filter(isDisagree)
+
+const isNeutral = function (responses) {
+  return responses === 'Neutral'
+}
+const filterNeutral = responses.filter(isNeutral)
+
+const isAgree = function (responses) {
+  return responses === 'Agree'
+}
+const filterAgree = responses.filter(isAgree)
+
+const isStronglyAgree = function (responses) {
+  return responses === 'Strongly Agree'
+}
+const filterStronglyAgree = responses.filter(isStronglyAgree)
 
 const onGetUserSurveysSuccess = function (data) {
   const id = store.user.id
@@ -110,9 +140,14 @@ const onGetUserSurveysSuccess = function (data) {
         // Note: Do not call the function if there are no responses for a survey
         // please delete these comments once display is implemented
         getSurveyStatistics(results[j])
-        titles = titles + ' <strong>' + userSurveys[j].title + '</strong><br>Has (' + results[j].length + ') response(s)<br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update This Survey</button>" + '<br><br>'
+        titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><a data-target='#responsesModal' data-toggle='modal' href='#responsesModal'> Has (" + results[j].length + ') response(s)</a><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update This Survey</button>" + '<br><br>'
       }
       $('#lndingpg_view_dashboard').html(titles)
+      $('#strongly-disagree').html('Strongly Disagree: ' + filterStronglyDisagree.length)
+      $('#disagree').html('Disagree: ' + filterDisagree.length)
+      $('#neutral').html('Neutral: ' + filterNeutral.length)
+      $('#agree').html('Agree: ' + filterAgree.length)
+      $('#strongly-agree').html('Strongly Agree: ' + filterStronglyAgree.length)
     })
     .catch((e) => {
       console.error(e)
