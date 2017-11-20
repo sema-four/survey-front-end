@@ -92,21 +92,12 @@ const getSurveyStatistics = (responses) => {
 
 const populateStats = function (survey, stats) {
   for (let k = 0; k < survey.questions.length; k++) {
-    console.log('survey.quetions', survey.questions[k].id)
-    console.log('stats.questionId', stats[survey.questions[k].id])
-    // for (let l = 0; l < stats[survey.questions[k].id].length; l++) {
-      console.log('all answers', Object.keys(stats[survey.questions[k].id]))
-    // }
-    let answer = Object.keys(stats[survey.questions[k].id])
-    console.log('answer', answer)
-      $('#strongly-disagree').html(answer[k] + ' : ' + answer[k].length)
-      console.log('answer[k]', answer[k])
-      console.log('answer[k].length', answer[k].length)
-      // $('#disagree').html('Disagree: ' + filterDisagree.length)
-      // $('#neutral').html('Neutral: ' + filterNeutral.length)
-      // $('#agree').html('Agree: ' + filterAgree.length)
-      // $('#strongly-agree').html('Strongly Agree: ' + filterStronglyAgree.length)
-    }
+    console.log('survey.quetions', survey.questions[k].question.questionDescription)
+    const keys = Object.keys(stats[survey.questions[k].id])
+    keys.forEach(key => {
+      console.log(stats[survey.questions[k].id][key][0] + ': ', stats[survey.questions[k].id][key].length)
+    })
+  }
 }
 
 const onGetUserSurveysSuccess = function (data) {
@@ -123,11 +114,7 @@ const onGetUserSurveysSuccess = function (data) {
   Promise.all(promises)
     .then((results) => {
       for (let j = 0; j < results.length; j++) {
-        // This function returns response stats for each survey
-        // right now we are not using the function
         // All we need to do is iterate over each questionId and display response
-        // count responses for each question and make it look pretty :)
-        // Note: Do not call the function if there are no responses for a survey
         // please delete these comments once display is implemented
         if (results[j].length > 0) {
           const stats = getSurveyStatistics(results[j])
@@ -136,11 +123,6 @@ const onGetUserSurveysSuccess = function (data) {
         titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><a data-target='#responsesModal' data-toggle='modal' href='#responsesModal'> Has (" + results[j].length + ') response(s)</a><br>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update This Survey</button>" + '<br><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>'
       }
       $('#lndingpg_view_dashboard').html(titles)
-      // $('#strongly-disagree').html('Strongly Disagree: ' + filterStronglyDisagree.length)
-      // $('#disagree').html('Disagree: ' + filterDisagree.length)
-      // $('#neutral').html('Neutral: ' + filterNeutral.length)
-      // $('#agree').html('Agree: ' + filterAgree.length)
-      // $('#strongly-agree').html('Strongly Agree: ' + filterStronglyAgree.length)
     })
     .catch((e) => {
       console.error(e)
