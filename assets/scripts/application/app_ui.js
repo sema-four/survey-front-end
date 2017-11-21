@@ -15,7 +15,7 @@ const toggleCreateSurvey = function () {
 
 const toggleDashboard = function () {
   $('#lndingpg_view_dashboard').removeClass('hidden')
-  $('#page-header').show().html('Manage your survey.')
+  $('#page-header').show().html('Here are all of your surveys. Click the links to see response details.')
   $('#lndingpg_survey_list, #display_survey').addClass('hidden')
   $('#lndingpg_create_survey').addClass('hidden')
   $('#lndingpg_update_survey').addClass('hidden')
@@ -123,10 +123,10 @@ const onGetUserSurveysSuccess = function (data) {
       for (let j = 0; j < results.length; j++) {
         if (results[j].length > 0) {
           const stats = getSurveyStatistics(results[j])
-          titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><a data-target='#responsesModal' id='trigger-modal' data-id=" + userSurveys[j].id + ' ' + "data-toggle='modal' href='#responsesModal'> Has (" + results[j].length + ') response(s)</a><br>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update Survey</button>" + '<br><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete Survey</button>" + '<br><br>'
+          titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><a data-target='#responsesModal' id='trigger-modal' data-id=" + userSurveys[j].id + ' ' + "data-toggle='modal' href='#responsesModal'> Has response(s)</a><br> <button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update Survey</button>" + '<br><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete Survey</button>" + '<br><br>'
           populateStats(userSurveys[j], stats)
         } else {
-          titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><p> Has (" + results[j].length + ') response(s)</p>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update Survey</button>" + '<br><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete Survey</button>" + '<br><br>'
+          titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><p> Has no response(s)</p><button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update Survey</button>" + '<br><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete Survey</button>" + '<br><br>'
         }
       }
       $('#lndingpg_view_dashboard').html(titles)
@@ -134,7 +134,7 @@ const onGetUserSurveysSuccess = function (data) {
     .catch((e) => {
       console.error(e)
     })
-  $('#page-header').show().html("Here are all of your surveys and their responses <br><br> Click the response links for more details.")
+  $('#page-header').show().html('Here are all of your surveys. Click the links to see response details.')
 }
 
 const onGetUserSurveyFailure = function () {
@@ -163,6 +163,7 @@ const showUpdateForm = function (data) {
   $('#show-survey-area').removeClass('hidden')
   $('#show-survey-area').html(showSurveyHtml)
   $('#lndingpg_view_dashboard').addClass('hidden')
+  $('#page-header').show().html('Manage your survey.')
 }
 
 const closeUpdate = function () {
@@ -171,7 +172,7 @@ const closeUpdate = function () {
   $('#question-title').val('')
   store.survey = null
   $('#lndingpg_view_dashboard').removeClass('hidden')
-  $('#page-header').show().html('Manage your survey.')
+  $('#page-header').show().html('Here are all of your surveys. Click the links to see response details.')
 }
 
 const onUpdateSurveySuccess = function () {
@@ -188,7 +189,8 @@ const onTakeSurveySuccess = function (data) {
   const showSurveyHtml = showSurveyTemplate({ surveys: data })
   $('#display_survey').removeClass('hidden')
   $('#result').show().html('Got the survey.').fadeOut(8000)
-  $('#lndingpg_survey_list, #page-header').addClass('hidden')
+  $('#lndingpg_survey_list').addClass('hidden')
+  $('#page-header').show().html('')
   $('#display_survey').html(showSurveyHtml)
 }
 const onTakeSurveyFailure = function () {

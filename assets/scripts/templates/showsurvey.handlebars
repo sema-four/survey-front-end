@@ -5,7 +5,8 @@
       <form id='take-survey-form'>
         <fieldset>
           <legend>Update Survey - {{survey.title}}</legend>
-          <h5>Questions already in your survey</h5>
+          <h4>Please note that adding new questions will eliminate previous responses when the survey is taken again.</h4>
+          <h5>Questions already in your survey.</h5>
           <br>
           {{#each survey.questions as |question|}}
           <div data-id={{question.id}}>
