@@ -92,11 +92,12 @@ const getSurveyStatistics = (responses) => {
 const populateStats = function (survey, stats) {
   let details = ''
   for (let k = 0; k < survey.questions.length; k++) {
-    details = details + '<hr><h4>' + survey.questions[k].question.questionDescription + '</h4>'
+    details = details + '<h4>' + survey.questions[k].question.questionDescription + '</h4><ul class="list-group">'
     const keys = Object.keys(stats[survey.questions[k].id])
     keys.forEach(key => {
-      details = details + '<ul>' + '<li><h5>' + stats[survey.questions[k].id][key][0] + ': ' + "<span class='label label-primary'>" + stats[survey.questions[k].id][key].length + '</span></h5></li>' + '</ul>'
+      details = details + '<li class="list-group-item">' + stats[survey.questions[k].id][key][0] + ': ' + "<span class='badge badge-info'>" + stats[survey.questions[k].id][key].length + '</span></li>'
     })
+    details = details + '</ul>'
     $(document).on('click', '#trigger-modal', function () {
       const id = this.getAttribute('data-id')
       if (survey.id === id) {
