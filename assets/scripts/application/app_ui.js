@@ -91,11 +91,18 @@ const getSurveyStatistics = (responses) => {
 }
 
 const populateStats = function (survey, stats) {
+  let details = ''
   for (let k = 0; k < survey.questions.length; k++) {
-    console.log('survey.quetions', survey.questions[k].question.questionDescription)
+    details = details + '<br><h4>' + survey.questions[k].question.questionDescription + '</h4>'
     const keys = Object.keys(stats[survey.questions[k].id])
     keys.forEach(key => {
-      console.log(stats[survey.questions[k].id][key][0] + ': ', stats[survey.questions[k].id][key].length)
+      details = details + '<h5>' + stats[survey.questions[k].id][key][0] + ': ' + stats[survey.questions[k].id][key].length + '</h5>'
+    })
+    $(document).on('click', '#trigger-modal', function () {
+      const id = this.getAttribute('data-id')
+      if (survey.id === id) {
+        $('#detailed-responses').html(details)
+      }
     })
   }
 }
@@ -114,13 +121,11 @@ const onGetUserSurveysSuccess = function (data) {
   Promise.all(promises)
     .then((results) => {
       for (let j = 0; j < results.length; j++) {
-        // All we need to do is iterate over each questionId and display response
-        // please delete these comments once display is implemented
         if (results[j].length > 0) {
           const stats = getSurveyStatistics(results[j])
           populateStats(userSurveys[j], stats)
         }
-        titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><a data-target='#responsesModal' data-toggle='modal' href='#responsesModal'> Has (" + results[j].length + ') response(s)</a><br>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update This Survey</button>" + '<br><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>'
+        titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><a data-target='#responsesModal' id='trigger-modal' data-id=" + userSurveys[j].id + ' ' + "data-toggle='modal' href='#responsesModal'> Has (" + results[j].length + ') response(s)</a><br>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update This Survey</button>" + '<br><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>'
       }
       $('#lndingpg_view_dashboard').html(titles)
     })
