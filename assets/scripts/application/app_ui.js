@@ -85,7 +85,6 @@ const getSurveyStatistics = (responses) => {
         }
       })
     }
-    console.log('Stats is', stats)
   }
   return stats
 }
@@ -93,15 +92,15 @@ const getSurveyStatistics = (responses) => {
 const populateStats = function (survey, stats) {
   let details = ''
   for (let k = 0; k < survey.questions.length; k++) {
-    details = details + '<br><h4>' + survey.questions[k].question.questionDescription + '</h4>'
+    details = details + '<hr><h4>' + survey.questions[k].question.questionDescription + '</h4>'
     const keys = Object.keys(stats[survey.questions[k].id])
     keys.forEach(key => {
-      details = details + '<h5>' + stats[survey.questions[k].id][key][0] + ': ' + stats[survey.questions[k].id][key].length + '</h5>'
+      details = details + '<ul>' + '<li><h5>' + stats[survey.questions[k].id][key][0] + ': ' + "<span class='label label-primary'>" + stats[survey.questions[k].id][key].length + '</span></h5></li>' + '</ul>'
     })
     $(document).on('click', '#trigger-modal', function () {
       const id = this.getAttribute('data-id')
       if (survey.id === id) {
-        $('#detailed-responses').html(details)
+        $('#detailed-responses').show().html(details)
       }
     })
   }
@@ -123,16 +122,18 @@ const onGetUserSurveysSuccess = function (data) {
       for (let j = 0; j < results.length; j++) {
         if (results[j].length > 0) {
           const stats = getSurveyStatistics(results[j])
+          titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><a data-target='#responsesModal' id='trigger-modal' data-id=" + userSurveys[j].id + ' ' + "data-toggle='modal' href='#responsesModal'> Has (" + results[j].length + ') response(s)</a><br>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update Survey</button>" + '<br><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete Survey</button>" + '<br><br>'
           populateStats(userSurveys[j], stats)
+        } else {
+          titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><p> Has (" + results[j].length + ') response(s)</p>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update Survey</button>" + '<br><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete Survey</button>" + '<br><br>'
         }
-        titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><a data-target='#responsesModal' id='trigger-modal' data-id=" + userSurveys[j].id + ' ' + "data-toggle='modal' href='#responsesModal'> Has (" + results[j].length + ') response(s)</a><br>' + "<button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update This Survey</button>" + '<br><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete This Survey</button>" + '<br><br>'
       }
       $('#lndingpg_view_dashboard').html(titles)
     })
     .catch((e) => {
       console.error(e)
     })
-  $('#page-header').show().html('Here are all of your surveys and their responses.')
+  $('#page-header').show().html("Here are all of your surveys and their responses <br><br> Click the response links for more details.")
 }
 
 const onGetUserSurveyFailure = function () {
