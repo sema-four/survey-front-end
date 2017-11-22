@@ -125,7 +125,7 @@ const onGetUserSurveysSuccess = function (data) {
       for (let j = 0; j < results.length; j++) {
         if (results[j].length > 0) {
           const stats = getSurveyStatistics(results[j])
-          titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><a data-target='#responsesModal' id='trigger-modal' data-id=" + userSurveys[j].id + ' ' + "data-toggle='modal' href='#responsesModal'> Has response(s)</a><br> <button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update Survey</button>" + '<br><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete Survey</button>" + '<br><br>'
+          titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><a data-target='#responsesModal' id='trigger-modal' data-id=" + userSurveys[j].id + ' ' + "data-toggle='modal' href='#responsesModal'> Has " + results[j].length + " response(s)</a><br> <button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update Survey</button>" + '<br><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete Survey</button>" + '<br><br>'
           populateStats(userSurveys[j], stats)
         } else {
           titles = titles + ' <strong>' + userSurveys[j].title + "</strong><br><p> Has no response(s)</p><button id='update-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-info'>Update Survey</button>" + '<br><br>' + "<button id='delete-survey' data-id=" + userSurveys[j].id + ' ' + "class='btn-danger'>Delete Survey</button>" + '<br><br>'
