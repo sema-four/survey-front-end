@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Survey Says!</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body class="container-fluid">
+      <nav class="navbar navbar-inverse">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar">&nbsp;</span>
+              <span class="icon-bar">&nbsp;</span>
+              <span class="icon-bar">&nbsp;</span>
+            </button>
+            <!-- <a class="navbar-brand" href="#">Survey Says!</a> -->
+            <img class="main-logo" src="https://i.imgur.com/dvjXlkQ.png" alt="Survey Says Logo" title="source: imgur.com" />
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left">
+              <button id="sign-in-register" type="button" class="btn btn-success btn-sm" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#signUpModal">Sign-In / Register</button>
+              <button id="home" type="button" class="btn btn-success btn-sm hidden">Home</button>
+              <button id="create-survey" type="button" class="btn btn-info btn-sm hidden" data-keyboard="false" data-backdrop="static" >Create a Survey</button>
+              <button id="view-dashboard" type="button" class="btn btn-info btn-sm hidden" >Survey Dashboard</button>
+              <button id="view-surveys" type="button" class="btn btn-info btn-sm hidden">View Surveys</button>
+            </form>
+            <!-- Sign Out Form  -->
+            <form id="sign-out" class="navbar-form navbar-right hidden">
+              <button id="change-pwd-btn" type="button" class="btn btn-info btn-sm hidden" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#signUpModal">Change Password</button>
+              <button type="submit" class="btn btn-danger btn-sm">Sign Out</button>
+            </form>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+          <div id="container" class="container-fluid">
+            <h5 id="result"></h5><br>
+            <h4 id="page-header" class="row hidden"></h4><br>
+            <!-- <h5 id="infoMessage">Please sign in to create a survey of your own.</h5> -->
+            <div class="container-fluid bg-3">
+              <div id="lndingpg_create_survey" class="row hidden">
+                <form id='create-survey-form'>
+                  <fieldset>
+                    <legend>Create Survey!</legend>
+                    <input type="hidden" name="survey[questions.question.active[][0]]" value="true">
+                    <input type="hidden" name="survey[questions.question.active[][1]]" value="true">
+                    <input type="hidden" name="survey[questions.question.active[][2]]" value="true">
+                    <input type="hidden" name="survey[questions.question.active[][3]]" value="true">
+                    <input type="hidden" name="survey[questions.question.active[][4]]" value="true">
+                    <input type="hidden" name="survey[questions.question.options[][0]]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">
+                    <input type="hidden" name="survey[questions.question.options[][1]]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">
+                    <input type="hidden" name="survey[questions.question.options[][2]]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">
+                      <input type="hidden" name="survey[questions.question.options[][3]]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">
+                        <input type="hidden" name="survey[questions.question.options[][4]]" value="['Strongly Disagree','Disagree', 'Neutral', 'Agree', 'Strongly Agree' ]">
+                    <label for="title">Survey Title:</label>
+                    <input type="text" id="title" name="survey[title]" placeholder="Add Survey Title Here!" required>
+                    <br><br>
+                    <label for="question-number">How many questions?</label>
+                    <select id="question-number">
+                      <option value="0">Select</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                    <br>
+                    <br>
+                    <h5>Each question will allow 1 of 5 responses: Strongly Disagree, Disagree, Neutral, Agree, Strongly Agree</h5>
+                    <br>
+                    <div id="dynamicQuestions"> </div>
+                    <br>
+                    <br>
+                   <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Submit Survey">Submit Survey</button>
+                 </fieldset>
+               </form>
+             </div>
+             <div id="lndingpg_view_dashboard" class="row hidden">
+             <!-- List of surveys here-->
+            </div>
+            <!-- Detailed Responses Modal  -->
+            <div class="modal fade" id="responsesModal" tabindex="-1" role="dialog" aria-labelledby="responsesModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="responsesModalLabel">Response Breakdown:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- Display the detailed responses here -->
+                    <div id="detailed-responses"></div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="lndingpg_update_survey" class="row hidden">
+            <!-- Update Survey / Add Question Form -->
+            <div id="show-survey-area"></div>
+            <form id="update-survey-form">
+              <fieldset>
+                <legend>Add a Question!</legend>
+                <h5 id="feedback"></h5>
+                <label for="update-question-title"id="update-label">New Question:</label><br>
+                <input type="text" id="update-question-title" name="survey[questions.question.questionDescription]" size="50" placeholder="Add question here" required>
+                <br>
+                <br>
+                <button type="submit" id="submit-update" class="btn btn-primary btn-sm" name="submit" value="Add Question">Add Question</button>
+                <button id="done-button" type="click" class="btn btn-primary btn-sm" name="click" value="Done">Done</button>
+              </fieldset>
+            </form>
+
+          </div>
+            <div id="lndingpg_survey_list" class="row hidden" >
+            <!-- List of surveys here-->
+
+          </div>
+          <div id="display_survey">
+          <!-- Display survey here-->
+        </div>
+        </div>
+      </div>
+      <!-- Sign Up Modal -->
+      <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="signUpModalLabel">Sign In / Register</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h5 id="sign-up-toggle-text">If not a registered user, then please register</h5>
+              <button id="sign-up-toggle" type="button" class="btn btn-success btn-sm">Sign Up / Register</button>
+              <h5 id="sign-in-toggle-text" class="hidden">If already a registered user, then please sign-in</h5>
+              <button id="sign-in-toggle" type="button" class="btn btn-success hidden btn-sm">Sign in</button>
+            </div>
+            <div class="modal-body">
+            <!-- Sign Up Form  -->
+            <form id="sign-up" class="hidden">
+              <fieldset>
+                <legend>Sign Up!</legend>
+                <input type="text" name="credentials[email]" placeholder="Email here" required>
+                <input type="password" name="credentials[password]" placeholder="Password here" required>
+                <input type="password" name="credentials[password_confirmation]" placeholder="Password conformation here" required><br><br>
+                <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Sign up">Sign Up</button>
+              </fieldset>
+            </form>
+            <!-- Change Password Form  -->
+            <form id="change-password" class="hidden">
+              <fieldset>
+                <legend>Change Password!</legend>
+                <input type="password" name="passwords[old]" placeholder="Old password here" required>
+                <input type="password" name="passwords[new]" placeholder="New password here" required>
+                <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Change Password">Change Password</button>
+              </fieldset>
+            </form>
+            <!-- Sign In Form  -->
+            <form id="sign-in">
+              <fieldset>
+                <legend>Sign In!</legend>
+                <input type="text" name="credentials[email]" placeholder="Email here" required>
+                <input type="password" name="credentials[password]" placeholder="Password here" required>
+                <button type="submit" class="btn btn-primary btn-sm" name="submit" value="Sign in">Sign In</button>
+              </fieldset>
+            </form><br>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+            </div><br>
+            <p id="modal-message"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="banner"><img class="center-block" src="https://i.imgur.com/n7HcLVF.png"> </div>
+    <footer>
+      <hr>
+      <h6>Brought to you by:</h6>
+      <img class="team-logo" src="https://i.imgur.com/t0Ls56u.png" alt="Sema-four logo" title="source: imgur.com" />
+    </footer>
+  </body>
+</html>
