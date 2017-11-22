@@ -92,18 +92,20 @@ const getSurveyStatistics = (responses) => {
 const populateStats = function (survey, stats) {
   let details = ''
   for (let k = 0; k < survey.questions.length; k++) {
-    details = details + '<h4>' + survey.questions[k].question.questionDescription + '</h4><ul class="list-group">'
-    const keys = Object.keys(stats[survey.questions[k].id])
-    keys.forEach(key => {
-      details = details + '<li class="list-group-item">' + stats[survey.questions[k].id][key][0] + ': ' + "<span class='badge badge-info'>" + stats[survey.questions[k].id][key].length + '</span></li>'
-    })
-    details = details + '</ul>'
-    $(document).on('click', '#trigger-modal', function () {
-      const id = this.getAttribute('data-id')
-      if (survey.id === id) {
-        $('#detailed-responses').show().html(details)
-      }
-    })
+    if (stats[survey.questions[k].id]) {
+      details = details + '<h4>' + survey.questions[k].question.questionDescription + '</h4><ul class="list-group">'
+      const keys = Object.keys(stats[survey.questions[k].id])
+      keys.forEach(key => {
+        details = details + '<li class="list-group-item">' + stats[survey.questions[k].id][key][0] + ': ' + "<span class='badge badge-info'>" + stats[survey.questions[k].id][key].length + '</span></li>'
+      })
+      details = details + '</ul>'
+      $(document).on('click', '#trigger-modal', function () {
+        const id = this.getAttribute('data-id')
+        if (survey.id === id) {
+          $('#detailed-responses').show().html(details)
+        }
+      })
+    }
   }
 }
 
@@ -171,14 +173,19 @@ const closeUpdate = function () {
   $('#lndingpg_update_survey').addClass('hidden')
   $('#question-title').val('')
   store.survey = null
-  $('#lndingpg_view_dashboard').removeClass('hidden')
-  $('#page-header').show().html('Here are all of your surveys. Click the links to see response details.')
+  $('#lndingpg_survey_list').removeClass('hidden')
 }
 
 const onUpdateSurveySuccess = function () {
-  $('#result').show().html('Your survey has been updated.').fadeOut(8000)
-  $(':input', '#update-survey-form').val('')
-  $('#question-title').val('')
+  appApi.deleteAllSurveyResponses(store.survey.id)
+    .then(() => {
+      $('#result').show().html('Your survey has been updated.').fadeOut(8000)
+      $(':input', '#update-survey-form').val('')
+      $('#question-title').val('')
+    })
+    .catch((e) => {
+      console.error(e)
+    })
 }
 
 const onUpdateSurveyFailure = function () {

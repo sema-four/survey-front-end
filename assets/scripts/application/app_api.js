@@ -18,6 +18,16 @@ const getSurvey = function (id) {
   })
 }
 
+const deleteAllSurveyResponses = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + '/delete-responses/' + id,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 const getSurveyResponses = function (id) {
   const promise = $.Deferred()
   $.ajax({
@@ -126,6 +136,7 @@ const createSurvey = function (stuff) {
 module.exports = {
   getSurveys,
   getSurvey,
+  deleteAllSurveyResponses,
   getSurveyResponses,
   createSurvey,
   deleteSurvey,
